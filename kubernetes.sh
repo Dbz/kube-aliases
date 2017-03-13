@@ -17,9 +17,13 @@ ksc () {
   kubectl config set-context "${2:-$(kubectl config current-context)}" --namespace "${1:-syman}"
 }
 
+kuc () {
+  kubectl config use-context "$1" --namespace="${2:-syman}"
+}
+
 krender () {
   fasd_cd scylla
-  ruby lib/kube/render_resources.rb config/ . kubernetes "${1:-2017.04.017}"
+  ruby lib/scylla_lib/kube/render_resources.rb config/ . kubernetes "${1:-2017.04.017}"
 }
 
 kapply () {
