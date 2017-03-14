@@ -31,3 +31,7 @@ kapply () {
   kc apply -f k8s_resources/dev/kubernetes/syman_components/ -R --namespace="${1:-syman}"
 }
 
+kexec () {
+  kubectl exec -it "$1" "${2:-bash}"
+}
+
