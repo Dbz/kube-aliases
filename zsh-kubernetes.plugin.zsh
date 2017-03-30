@@ -13,12 +13,18 @@ alias klf='kubectl logs -f'
 alias kaf='kubectl apply -f'
 alias kra='krender; kapply'
 
+namespace="daniel-burt"
+
+kexec () {
+  kubectl exec -it "$1" "${2:-bash}"
+}
+
 ksc () {
-  kubectl config set-context "${2:-$(kubectl config current-context)}" --namespace "${1:-syman}"
+  kubectl config set-context "${2:-$(kubectl config current-context)}" --namespace "${1:-$namespace}"
 }
 
 kuc () {
-  kubectl config use-context "$1" --namespace="${2:-syman}"
+  kubectl config use-context "$1" --namespace="${2:-$namespace}"
 }
 
 krender () {
@@ -28,10 +34,6 @@ krender () {
 
 kapply () {
   fasd_cd scylla
-  kc apply -f k8s_resources/dev/kubernetes/syman_components/ -R --namespace="${1:-syman}"
-}
-
-kexec () {
-  kubectl exec -it "$1" "${2:-bash}"
+  kc apply -f k8s_resources/dev/kubernetes/$namespace_components/ -R --namespace="${1:-$namespace}"
 }
 
