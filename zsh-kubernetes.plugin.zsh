@@ -37,3 +37,8 @@ kapply () {
   kc apply -f k8s_resources/dev/kubernetes/$namespace_components/ -R --namespace="${1:-$namespace}"
 }
 
+kpf () {
+  kubectl port-forward "$1" 9990:9990 --namespace"${2:-$namespace}"
+}
+
+
