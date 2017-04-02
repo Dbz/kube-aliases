@@ -38,7 +38,7 @@ kapply () {
 }
 
 kpf () {
-  kubectl port-forward "$1" 9990:9990 --namespace"${2:-$namespace}"
+  kubectl port-forward "$1" 9990:9990 --namespace="${2:-$namespace}"
 }
 
 
