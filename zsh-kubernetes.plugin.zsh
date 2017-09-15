@@ -22,7 +22,8 @@ kexec () {
 }
 
 ksc () {
-  kubectl config set-context "${2:-$(kubectl config current-context)}" --namespace "${1:-$namespace}"
+  kc config set-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
+  kc config use-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
 }
 
 kuc () {
