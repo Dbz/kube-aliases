@@ -12,21 +12,28 @@ alias kdd='kubectl delete deployment'
 alias kdj='kubectl delete job'
 alias kdf='kubectl delete -f'
 alias klf='kubectl logs -f'
+alias kcl='kubectl logs'
 alias kaf='kubectl apply -f'
 alias kra='krender; kapply'
 
 namespace="daniel-burt"
 
-kexec () {
+kcexec () {
   kubectl exec -it "$1" "${2:-bash}"
 }
 
-ksc () {
+knc () {
+  kc config set-context kube-aws-"$1"-context --namespace syman
+  kc config use-context kube-aws-"$1"-context --namespace syman
+}
+
+kcaws () {
   kc config set-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
   kc config use-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
 }
 
 kuc () {
+  kubectl config set-context "$1" --namespace="${2:-$namespace}"
   kubectl config use-context "$1" --namespace="${2:-$namespace}"
 }
 
@@ -43,5 +50,4 @@ kapply () {
 kpf () {
   kubectl port-forward "$1" 9990:9990 --namespace="${2:-$namespace}"
 }
-
 
