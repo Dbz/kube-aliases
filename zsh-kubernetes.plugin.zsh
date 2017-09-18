@@ -27,7 +27,7 @@ knc () {
   kc config use-context kube-aws-"$1"-context --namespace syman
 }
 
-kcaws () {
+kncaws () {
   kc config set-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
   kc config use-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
 }
