@@ -16,25 +16,23 @@ alias kcl='kubectl logs'
 alias kaf='kubectl apply -f'
 alias kra='krender; kapply'
 
-namespace="daniel-burt"
-
 kcexec () {
   kubectl exec -it "$1" "${2:-bash}"
 }
 
 knc () {
-  kc config set-context kube-aws-"$1"-context --namespace syman
-  kc config use-context kube-aws-"$1"-context --namespace syman
+  kc config set-context kube-aws-"$1"-context --namespace $AWS_NAMESPACE
+  kc config use-context kube-aws-"$1"-context --namespace $AWS_NAMESPACE
 }
 
 kncaws () {
-  kc config set-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
-  kc config use-context kube-aws-"$CURRENT_CLUSTER"-context --namespace syman
+  kc config set-context kube-aws-"$CURRENT_CLUSTER"-context --namespace $AWS_NAMESPACE
+  kc config use-context kube-aws-"$CURRENT_CLUSTER"-context --namespace $AWS_NAMESPACE
 }
 
 kuc () {
-  kubectl config set-context "$1" --namespace="${2:-$namespace}"
-  kubectl config use-context "$1" --namespace="${2:-$namespace}"
+  kubectl config set-context "$1" --namespace="${2:-$PDXENG_NAMESPACE}"
+  kubectl config use-context "$1" --namespace="${2:-$PDXENG_NAMESPACE}"
 }
 
 krender () {
@@ -44,10 +42,10 @@ krender () {
 
 kapply () {
   fasd_cd scylla
-  kc apply -f k8s_resources/dev/kubernetes/$namespace_components/ -R --namespace="${1:-$namespace}"
+  kc apply -f k8s_resources/dev/kubernetes/$namespace_components/ -R --namespace="${1:-$PDXENG_NAMESPACE}"
 }
 
 kpf () {
-  kubectl port-forward "$1" 9990:9990 --namespace="${2:-$namespace}"
+  kubectl port-forward "$1" 9990:9990 --namespace="${2:-$PDXENG_NAMESPACE}"
 }
 
