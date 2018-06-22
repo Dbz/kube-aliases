@@ -10,7 +10,7 @@ There are a few main features of this plugin. First, there are lots of aliases t
 
 These are the aliases included in zsh-kubernetes:
 
-```
+```bash
 alias kube='kubectl'
 alias kc='kubectl'
 alias kgp='kubectl get pods'
@@ -23,10 +23,14 @@ alias kcc='kubectl config get-contexts'
 alias kdp='kubectl delete pod'
 alias kdd='kubectl delete deployment'
 alias kdj='kubectl delete job'
+alias kdi='kubectl delete ing'
+alias kdn='kubectl delete namespace'
+alias kds='kubectl delete service'
 alias kdf='kubectl delete -f'
 alias klf='kubectl logs -f'
 alias kcl='kubectl logs'
 alias kaf='kubectl apply -f'
+alias kcf='kubectl create -f'
 alias kra='krender; kapply'
 ```
 
