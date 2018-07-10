@@ -122,18 +122,18 @@ kpf () {
 }
 
 # Get all resources (e.g. pod) in all namespaces
-function get_cluster_resources {
+get_cluster_resources () {
   kubectl get $1 -o wide --all-namespaces ${@:2}
 }
 
 # Find a resource (e.g. a pod by name)
-function kfind {
+kfind () {
 
   kubectl get all --all-namespaces | grep -i -E --color=always "${@}|$"
 
 }
 
-function khelp {
+khelp () {
 
   case $1 in
      commands|cmd)
