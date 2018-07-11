@@ -135,16 +135,28 @@ kfind () {
 
 khelp () {
 
-  case $1 in
-     commands|cmd)
-       cat $KALIAS/docs/usage
-     ;;
-     resources|res)
-       cat $KALIAS/docs/resources
-     ;;
-     *)
-       echo "usage: khelp (cmd|res)"
-     ;;
-   esac
+case $1 in
+  commands|cmd)
+    cat $KALIAS/docs/usage
+  ;;
+  resources|res)
+    cat $KALIAS/docs/resources
+  ;;
+  *)
+    echo "usage: khelp (cmd|res)"
+  ;;
+esac
 
+}
+
+kpnames () {
+  echo $(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{" "}}{{end}}')
+}
+
+# Delete all pods within a namespace.
+kdap () {
+  read "kdelete?This will attempt to delete all pods within the namespace. Do you want to continue?(y/N) "
+  if [[ "${kdelete}" =~ ^[yY]$ ]]; then
+    kubectl delete pods $(kpnames)
+  fi
 }
