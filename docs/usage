@@ -4,15 +4,16 @@ Run a command in a container or enter the container.
     kexec pod [command]
 Execute a command in a specified pod, default drops user into the shell
     kcexec podname [command]
-
 Get all resources (e.g. pod) in all namespaces
     get_cluster_resources resource [any other arguements]
-
 Find a resource (e.g. a pod by name)
     kfind grepcommand
-
 Print out aliases or resources for kubernetes
     khelp (commands|cmd|resources|res)
+Print out the names of all pods in a namespace
+    kgpn 
+Delete all pods in a namespace
+    kdap
 
 Contexts 
     kcc                             kubectl config get-contexts
