@@ -11,7 +11,7 @@ Find a resource (e.g. a pod by name)
 Print out aliases or resources for kubernetes
     khelp (commands|cmd|resources|res)
 Print out the names of all pods in a namespace
-    kgpn 
+    kgpns
 Delete all pods in a namespace
     kdap
 
