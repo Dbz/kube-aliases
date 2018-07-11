@@ -133,6 +133,7 @@ kfind () {
 
 }
 
+# Display help
 khelp () {
 
 case $1 in
@@ -150,7 +151,7 @@ esac
 }
 
 # Get the pod names of all pods in a namespace.
-kgpn () {
+kgpns () {
   echo $(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{" "}}{{end}}')
 }
 
@@ -158,6 +159,6 @@ kgpn () {
 kdap () {
   read "kdelete?This will attempt to delete all pods within the namespace. Do you want to continue?(y/N) "
   if [[ "${kdelete}" =~ ^[yY]$ ]]; then
-    kubectl delete pods $(kgpn)
+    kubectl delete pods $(kgpns)
   fi
 }
