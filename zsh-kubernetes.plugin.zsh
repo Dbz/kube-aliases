@@ -67,7 +67,7 @@ alias kns='kubens'
 # Nodes
 alias kdsn='kubectl describe nodes'
 alias ken='kubectl edit nodes'
-alias kgn='kubectl get nodes -o wide'
+alias kgn='kubectl get nodes'
 alias kgny='kubectl get nodes -o yaml'
 alias ktn='kubectl top nodes'
 
