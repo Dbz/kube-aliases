@@ -1,4 +1,5 @@
 KALIAS=$ZSH_CUSTOM/plugins/zsh-kubernetes
+KRESOURCES=$ZSH_CUSTOM/plugins/zsh-kubernetes/docs/resources
 
 # Contexts
 alias kcc='kubectl config get-contexts'
@@ -58,7 +59,8 @@ alias kgaj='get_cluster_resources jobs'
 
 # Namespaces
 alias kdns='kubectl delete namespaces'
-alias kdsns='kubectl describe namespaces'
+alias kdsns='kubec
+    8   *)tl describe namespaces'
 alias kens='kubectl edit namespaces'
 alias kgns='kubectl get namespaces'
 alias kgnsy='kubectl get namespaces -o yaml'
@@ -129,7 +131,19 @@ get_cluster_resources () {
 # Find a resource (e.g. a pod by name)
 kfind () {
 
-  kubectl get all --all-namespaces | grep -i -E --color=always "${@}|$"
+  # kubectl get all --all-namespaces | grep -i -E --color=always "${@}|$"
+  sed 1d $KRESOURCES | while read resource; do
+    kubectl get $resource --all-namespaces -o wide 2>/dev/null | \
+      $KALIAS/src/kfind.awk -v regex="${1}" -v resourcetype="${resource}"
+  done
+  
+}
+
+# Search pods using regular expression
+kpfind () {
+
+  column -t <<< $(kubectl get pods --all-namespaces -o wide | \
+    $KALIAS/src/kpfind.awk -v regex="${1}")
 
 }
 
@@ -141,7 +155,11 @@ case $1 in
     cat $KALIAS/docs/usage
   ;;
   resources|res)
-    cat $KALIAS/docs/resources
+    echo "Resource Types:"
+    for resource in ${KRESOURCES[@]}
+    do
+      echo "\t ${resource}"
+    done
   ;;
   *)
     echo "usage: khelp (cmd|res)"
@@ -150,7 +168,7 @@ esac
 
 }
 
-# Get the pod names of all pods in a namespace.
+# Get the pod names (just the names) of all pods in a namespace.
 kgpns () {
   echo $(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{" "}}{{end}}')
 }
