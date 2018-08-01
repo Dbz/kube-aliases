@@ -59,8 +59,7 @@ alias kgaj='get_cluster_resources jobs'
 
 # Namespaces
 alias kdns='kubectl delete namespaces'
-alias kdsns='kubec
-    8   *)tl describe namespaces'
+alias kdsns='kubectl describe namespaces'
 alias kens='kubectl edit namespaces'
 alias kgns='kubectl get namespaces'
 alias kgnsy='kubectl get namespaces -o yaml'
