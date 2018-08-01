@@ -93,6 +93,9 @@ alias kgsy='kubectl get services -o yaml'
 kcexec () {
   kubectl exec -it "$1" "${2:-bash}"
 }
+kexec () {
+  kubectl exec -it "$1" "${2:-bash}"
+}
 
 knc () {
   kc config set-context kube-aws-"$1"-context --namespace $AWS_NAMESPACE
