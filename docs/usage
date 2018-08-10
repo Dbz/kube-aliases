@@ -1,0 +1,102 @@
+Delete all pods in a namespace
+    kdap 
+Run a command in a container or enter the container.
+    kexec pod [command]
+Find everything with (e.g. all resources on a node)
+    kfind regular expression 
+Execute a command in a specified pod, default drops user into the shell
+    kcexec podname [command]
+Get all resources (e.g. pod) in all namespaces
+    get_cluster_resources resource [any other arguements]
+Print out aliases or resources for kubernetes
+    khelp (commands|cmd|resources|res)
+Print out the names of all pods in a namespace
+    kgpns
+Find pods with regular expressions
+    kpfind
+
+Contexts 
+    kcc                             kubectl config get-contexts
+    kctx                            kubectx
+
+Core aliases
+    k                               kubectl
+    kc                              kubectl
+    kube                            kubectl
+    kd                              kubectl delete 
+    kds                             kubectl describe
+    ke                              kubectl edit
+    kg                              kubectl get
+    kga                             kubectl get --all-namespaces
+    kl                              kubectl logs
+    klf                             kubectl logs -f
+    kns                             kubens
+    kra                             krender; kapply
+
+Cronjobs
+    kdc                             kubectl delete cronjobs
+    kdsc                            kubectl describe cronjobs
+    kec                             kubectl edit cronjobs
+    kgc                             kubectl get cronjobs
+    kgcy                            kubectl get cronjobs -o yaml
+    kgac                            get_cluster_resources cronjobs
+    
+Deployments
+    kdd                             kubectl delete deployments
+    kdsd                            kubectl describe deployments
+    ked                             kubectl edit deployments
+    kgd                             kubectl get deployments 
+    kgdy                            kubectl get deployments -o yaml
+    
+From file
+    kaf                             kubectl apply -f
+    kcf                             kubectl create -f
+    kdf                             kubectl delete -f
+    kef                             kubectl edit -f
+    kdsf                            kubectl describe -f
+    kgf                             kubectl get -f
+    
+Ingress
+    kdi                             kubectl delete ingress
+    kgi                             kubectl get ingress
+    kgiy                            kubectl get ingress -o yaml
+    kdsi                            kubectl describe ingress
+    kei                             kubectl edit ingress
+    kgai                            get_cluster_resources ingress
+    
+Jobs
+    kdj                             kubectl delete job
+    kdsj                            kubectl describe job
+    kej                             kubectl edit jobs
+    kgj                             kubectl get jobs
+    kgjy                            kubectl get jobs -o yaml
+    kgaj                            get_cluster_resources jobs
+    
+Namespaces
+    kdns                            kubectl delete namespaces
+    kdsns                           kubectl describe namespaces
+    kens                            kubectl edit namespaces
+    kgns                            kubectl get namespaces
+    kgnsy                           kubectl get namespaces -o yaml
+    
+Nodes
+    kdsn                            kubectl describe nodes
+    ken                             kubectl edit nodes
+    kgn                             kubectl get nodes
+    kgny                            kubectl get nodes -o yaml
+    ktn                             kubectl top nodes
+    
+Pods
+    kdp                             kubectl delete pods
+    kdsp                            kubectl describe pods
+    kgap                            get_cluster_resources pods 
+    kgp                             kubectl get pods
+    kgpy                            kubectl get pods -o yaml
+    ktp                             kubectl top pods
+    
+Services
+    kdss                            kubectl describe services
+    kes                             kubectl edit services
+    kgas                            get_cluster_resources services
+    kgs                             kubectl get services
+    kgsy                            kubectl get services -o yaml
