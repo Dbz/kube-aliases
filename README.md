@@ -99,6 +99,16 @@ alias kgs='kubectl get services'
 alias kgsy='kubectl get services -o yaml'
 ```
 
+### Functions
+
+There are several functions that can also be used. One of note is the help,
+which gives the usage.
+
+```
+khelp (commands|cmd|resources|res)
+```
+
+
 ## Environment Variables
 
 There are several environment variables used to make this plugin work for everyone.
