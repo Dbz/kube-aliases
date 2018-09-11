@@ -141,6 +141,11 @@ kfind () {
   
 }
 
+# Start a restart on pods, will follow the rolling release policy
+krd () {
+  kubectl patch deployment ${1} -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+}
+
 # Search pods using regular expression
 kpfind () {
 
