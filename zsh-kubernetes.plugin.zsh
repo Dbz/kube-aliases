@@ -187,3 +187,11 @@ kdap () {
     kubectl delete pods $(kgpns)
   fi
 }
+
+# Drain node 
+kdrain () {
+  read "kdrainnode? This will drain the node ${1}, delete local data, and ignore daemonsets. Do you want to continue?(y/N) "
+  if [[ "${kdrainnode}" =~ ^[yY]$ ]]; then
+    kubectl drain ${1} --delete-local-data --force --ignore-daemonsets
+  fi
+}
