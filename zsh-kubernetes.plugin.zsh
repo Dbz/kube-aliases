@@ -246,11 +246,8 @@ case $1 in
     cat $KALIAS/docs/usage
   ;;
   resources|res)
-    echo "Resource Types:"
-    for resource in ${KRESOURCES[@]}
-    do
-      echo "\t ${resource}"
-    done
+    cat $KALIAS/docs/resources
+    kubectl get customresourcedefinition | awk 'NR>1 {print $1}'
   ;;
   *)
     echo "usage: khelp (cmd|res)"

@@ -9,7 +9,7 @@ $0 ~ regex {
   # If we have found a match and have not printed a title
   if (RESOURCES) {
     if (regex != "") {
-      print "RESOURCE TYPE: " resourcetype
+      print resourcetype ":"
       print title
     }
     RESOURCES = ""
