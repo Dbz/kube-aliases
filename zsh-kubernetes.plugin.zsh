@@ -47,6 +47,12 @@ alias kgc='kubectl get cronjobs'
 alias kgcy='kubectl get cronjobs -o yaml'
 alias kgac='get_cluster_resources cronjobs'
 
+# customresourcedefinition
+alias kgcrd='kubectl get customresourcedefinition'
+
+# daemonsets
+alias kgds='kubectl get daemonsets'
+
 # Deployments
 alias kdd='kubectl delete deployment'
 alias kdsd='kubectl describe deployments'
