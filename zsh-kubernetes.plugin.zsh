@@ -19,12 +19,36 @@ alias kcl='kubectl logs'
 alias klf='kubectl logs -f'
 alias kra='krender; kapply'
 
+# certificatesigningrequests
+alias kgcsr='kubectl get certificatesigningrequests'
+
+# clusterrolebindings
+alias kgcrb='kubectl get clusterrolebindings'
+
+# clusterroles
+alias kgcr='kubectl get clusterroles'
+
+# componentstatuses
+alias kgcs='kubectl get componentstatus'
+
+# configmaps
+alias kgcm='kubectl get configmaps'
+
+# controllerrevisions
+alias kgcrv='kubectl get controllerrevisions'
+
 # Cronjobs
 alias kdsc='kubectl describe cronjobs'
 alias kec='kubectl edit cronjobs'
 alias kgc='kubectl get cronjobs'
 alias kgcy='kubectl get cronjobs -o yaml'
 alias kgac='get_cluster_resources cronjobs'
+
+# customresourcedefinition
+alias kgcrd='kubectl get customresourcedefinition'
+
+# daemonsets
+alias kgds='kubectl get daemonsets'
 
 # Deployments
 alias kdd='kubectl delete deployment'
@@ -33,6 +57,12 @@ alias ked='kubectl edit deployments'
 alias kgd='kubectl get deployments'
 alias kgdy='kubectl get deployments -o yaml'
 
+# endpoints
+alias kgep='kubectl get endpoints'
+
+# endpoints
+alias kgev='kubectl get events'
+
 # From file
 alias kaf='kubectl apply -f'
 alias kcf='kubectl create -f'
@@ -40,6 +70,9 @@ alias kdf='kubectl delete -f'
 alias kef='kubectl edit -f'
 alias kdsf='kubectl describe -f'
 alias kgf='kubectl get -f'
+
+# horizontalpodautoscalers
+alias kghpa='kubectl get horizontalpodautoscalers'
 
 # Ingress
 alias kdi='kubectl delete ingress'
@@ -57,6 +90,9 @@ alias kgj='kubectl get jobs'
 alias kgjy='kubectl get jobs -o yaml'
 alias kgaj='get_cluster_resources jobs'
 
+# limitranges
+alias kglr='kubectl get limitranges'
+
 # Namespaces
 alias kdns='kubectl delete namespaces'
 alias kdsns='kubectl describe namespaces'
@@ -65,12 +101,27 @@ alias kgns='kubectl get namespaces'
 alias kgnsy='kubectl get namespaces -o yaml'
 alias kns='kubens'
 
+# networkpolicies
+alias kgnp='kubectl get networkpolicies'
+
 # Nodes
 alias kdsn='kubectl describe nodes'
 alias ken='kubectl edit nodes'
 alias kgn='kubectl get nodes'
 alias kgny='kubectl get nodes -o yaml'
 alias ktn='kubectl top nodes'
+
+# persistentvolumeclaims
+alias kgpvc='kubectl get persistentvolumeclaims'
+
+# persistentvolumes
+alias kgpv='kubectl get persistentvolumes'
+
+# poddisruptionbudgets
+alias kgpdb='kubectl get poddisruptionbudgets'
+
+# podpreset
+alias kgpp='kubectl get podpreset'
 
 # Pods
 alias kdp='kubectl delete pod'
@@ -81,12 +132,42 @@ alias kgp='kubectl get pods'
 alias kgpy='kubectl get pods -o yaml'
 alias ktp='kubectl top pods'
 
+# podsecuritypolicies
+alias kpsp='kubectl get podsecuritypolicies'
+
+# podtemplates
+alias kpt='kubectl get podtemplates'
+
+# replicasets
+alias krs='kubectl get replicasets'
+
+# replicationcontrollers
+alias kgrc='kubectl get replicationcontrollers'
+
+# resourcequotas
+alias kgrq='kubectl get resourcequotas'
+
+# rolebindings
+alias kgrb='kubectl get rolebindings'
+
+# roles
+alias kgr='kubectl get roles'
+
+# secrets
+alias kgs='kubectl get secrets'
+
+# serviceaccounts
+alias kgsa='kubectl get serviceaccounts'
+
 # Services
 alias kdss='kubectl describe services'
 alias kes='kubectl edit services'
 alias kgas='get_cluster_resources services'
 alias kgs='kubectl get services'
 alias kgsy='kubectl get services -o yaml'
+
+# statefulsets
+alias kgsts='kubectl get statefulsets'
 
 # Execute a command in a specified pod, default drops user into the shell
 kcexec () {
