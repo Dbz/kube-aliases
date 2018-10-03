@@ -47,12 +47,6 @@ alias kgc='kubectl get cronjobs'
 alias kgcy='kubectl get cronjobs -o yaml'
 alias kgac='get_cluster_resources cronjobs'
 
-# customresourcedefinition
-alias kgcrd='kubectl get customresourcedefinition'
-
-# daemonsets
-alias kgds='kubectl get daemonsets'
-
 # Deployments
 alias kdd='kubectl delete deployment'
 alias kdsd='kubectl describe deployments'
@@ -63,10 +57,10 @@ alias kgdy='kubectl get deployments -o yaml'
 # endpoints
 alias kgep='kubectl get endpoints'
 
-# endpoints
+# events
 alias kgev='kubectl get events'
 
-# From file
+# from file
 alias kaf='kubectl apply -f'
 alias kcf='kubectl create -f'
 alias kdf='kubectl delete -f'
@@ -214,6 +208,7 @@ get_cluster_resources () {
   kubectl get $1 -o wide --all-namespaces ${@:2}
 }
 
+# TODO: Go through all resources.
 # Find a resource (e.g. a pod by name)
 kfind () {
 
@@ -242,7 +237,7 @@ kpfind () {
 khelp () {
 
 case $1 in
-  commands|cmd)
+  commands|cmd|usage)
     cat $KALIAS/docs/usage
   ;;
   resources|res)
