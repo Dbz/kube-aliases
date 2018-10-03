@@ -1,3 +1,6 @@
+# Auto complete, for bash replace zsh with bash
+source <(kubectl completion zsh)
+
 KALIAS=$ZSH_CUSTOM/plugins/zsh-kubernetes
 KRESOURCES=$ZSH_CUSTOM/plugins/zsh-kubernetes/docs/resources
 
