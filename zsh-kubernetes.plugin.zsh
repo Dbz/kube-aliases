@@ -1,5 +1,6 @@
 # Auto complete, for bash replace zsh with bash
-source <(kubectl completion zsh)
+# For some reason this is sourcing the oh-my-zsh plugin.
+# source <(kubectl completion zsh)
 
 KALIAS=$ZSH_CUSTOM/plugins/zsh-kubernetes
 KRESOURCES=$ZSH_CUSTOM/plugins/zsh-kubernetes/docs/resources
@@ -205,9 +206,10 @@ kapply () {
   kc apply -f k8s_resources/dev/kubernetes/$namespace_components/ -R --namespace="${1:-$PDXENG_NAMESPACE}"
 }
 
-kpf () {
-  kubectl port-forward "$1" 9990:9990 --namespace="${2:-$PDXENG_NAMESPACE}"
-}
+# TODO: kpf name conflict from sourcing autocomplete
+# kpf () {
+#   kubectl port-forward "$1" 9990:9990 --namespace="${2:-$PDXENG_NAMESPACE}"
+# }
 
 # Get all resources (e.g. pod) in all namespaces
 get_cluster_resources () {
@@ -223,7 +225,12 @@ kfind () {
     kubectl get $resource --all-namespaces -o wide 2>/dev/null | \
       $KALIAS/src/kfind.awk -v regex="${1}" -v resourcetype="${resource}"
   done
-  
+
+#   local custom=$(kubectl get customresourcedefinition)
+#   echo $custom | while read resource; do
+#     kubectl get "${resource}" --all-namespaces -o wide | \
+#       $KALIAS/src/kfind.awk -v regex="${1}" -v resourcetype="${resource}"
+  # done
 }
 
 # Start a restart on pods, will follow the rolling release policy
