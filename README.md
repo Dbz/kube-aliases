@@ -1,7 +1,9 @@
 # zsh-kuberenetes
 
 This is an oh-my-zsh plugin to make working with kubernetes easier. It provides
-a bunch of bash aliases and zsh functions.
+a bunch of bash aliases and zsh functions. Docs can be found
+[here](https://github.com/Dbz/zsh-kubernetes/blob/master/docs/usage), which
+clarifies all aliases.
 
 ## Usage
 
