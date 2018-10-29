@@ -36,7 +36,11 @@ alias kgcr='kubectl get clusterroles'
 alias kgcs='kubectl get componentstatus'
 
 # configmaps
+alias kdscm='kubectl describe configmaps'
+alias kecm='kubectl edit configmaps'
 alias kgcm='kubectl get configmaps'
+alias kgcmy='kubectl get configmaps -o wide'
+alias kgacm='get_cluster_resources configmaps'
 
 # controllerrevisions
 alias kgcrv='kubectl get controllerrevisions'
