@@ -1,3 +1,5 @@
+# #!/bin/bash
+
 # Auto complete, for bash replace zsh with bash
 # For some reason this is sourcing the oh-my-zsh plugin.
 # source <(kubectl completion zsh)
