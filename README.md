@@ -1,8 +1,8 @@
-# zsh-kuberenetes
+# kube-aliases
 
 This is an oh-my-zsh plugin to make working with kubernetes easier. It provides
 a bunch of bash aliases and zsh functions. Docs can be found
-[here](https://github.com/Dbz/zsh-kubernetes/blob/master/docs/usage), which
+[here](https://github.com/Dbz/kube-aliases/blob/master/docs/usage), which
 clarifies all aliases.
 
 ## Usage
@@ -49,45 +49,30 @@ alias kdsf='kubectl describe -f'
 alias kgf='kubectl get -f'
 ```
 
-## Environment Variables
-
-There are several environment variables used to make this plugin work for everyone.
-
-1. `ZSH_CUSTOM` Location of the custom folder for [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
-2. `CURRENT_CLUSTER` is the name of your cluster in AWS
-3. `PDXENG_NAMESPACE` is the name of your namespace in pdxeng
-4. `AWS_NAMESPACE` is the name of your namespace in AWS
-5. `KUBECONFIG` is a path used by kubectl to find kubeconfigs
-
-example:
-
-```
-export CURRENT_CLUSTER='symantest8281'
-export PDXENG_NAMESPACE='daniel-burt'
-export AWS_NAMESPACE='syman'
-export KUBECONFIG="/Users/daniel.burt/.kube/config:/Users/daniel.burt/.kube/configs/aws-config:/Users/daniel.burt/Downloads/$CURRENT_CLUSTER/kubeconfig"
-```
-
 ## Installation
 
 ### Oh-My-Zsh
 
 ```
-git clone git@github.com:Dbz/zsh-kubernetes.git ~/.oh-my-zsh/custom/plugins/zsh-kubernetes
-echo "plugins+=(zsh-kubernetes)" >> ~/.zshrc
+git clone git@github.com:Dbz/kube-aliases.git ~/.oh-my-zsh/custom/plugins/kube-aliases
+echo "plugins+=(kube-aliases)" >> ~/.zshrc
 ```
 
 You can also manually place `zsh-kuberenetes` inside of `plugins=(...)`
 
-If you have set the `ZSH_CUSTOM` environment variable in your zshrc, then you should modify the git clone directory to be `$ZSH_CUSTOM/plugins/zsh-kubernetes`.
+If you have set the `ZSH_CUSTOM` environment variable in your zshrc, then you should modify the git clone directory to be `$ZSH_CUSTOM/plugins/kube-aliases`.
+
+### Plug
+
+Add `Plug 'dbz/kube-aliases'` to your plugins in your `.zshrc`
 
 ### Antigen
 
-Add `antigen bundle dbz/zsh-kubernetes` to your antigen bundles in your `.zshrc`
+Add `antigen bundle dbz/kube-aliases` to your antigen bundles in your `.zshrc`
 
 ### Zgen
 
-Add `zgen load dbz/zsh-kubernetes` to your zgen plugins in your `.zshrc`
+Add `zgen load dbz/kube-aliases` to your zgen plugins in your `.zshrc`
 
 ### Aliases for Kubernetes Extensions
 

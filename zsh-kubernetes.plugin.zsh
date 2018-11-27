@@ -179,40 +179,21 @@ alias kgss='kubectl get statefulsets'
 
 # Execute a command in a specified pod, default drops user into the shell
 kcexec () {
-  kubectl exec -it "$1" "${2:-bash}"
+  kubectl exec -it $1 ${2:-bash}
 }
 kexec () {
-  kubectl exec -it "$1" "${2:-bash}"
+  kubectl exec -it $1 ${2:-bash}
 }
 
+# Set and use a new context 
 knc () {
-  kc config set-context kube-aws-"$1"-context --namespace $AWS_NAMESPACE
-  kc config use-context kube-aws-"$1"-context --namespace $AWS_NAMESPACE
-}
-
-kncaws () {
-  kc config set-context kube-aws-"$CURRENT_CLUSTER"-context --namespace $AWS_NAMESPACE
-  kc config use-context kube-aws-"$CURRENT_CLUSTER"-context --namespace $AWS_NAMESPACE
-}
-
-kuc () {
-  kubectl config set-context "$1" --namespace="${2:-$PDXENG_NAMESPACE}"
-  kubectl config use-context "$1" --namespace="${2:-$PDXENG_NAMESPACE}"
-}
-
-krender () {
-  fasd_cd scylla
-  ruby lib/scylla_lib/kube/render_resources.rb config/ . kubernetes "${1:-2017.04.017}"
-}
-
-kapply () {
-  fasd_cd scylla
-  kc apply -f k8s_resources/dev/kubernetes/$namespace_components/ -R --namespace="${1:-$PDXENG_NAMESPACE}"
+  kc config set-context $1
+  kc config use-context $1
 }
 
 # TODO: kpf name conflict from sourcing autocomplete
 # kpf () {
-#   kubectl port-forward "$1" 9990:9990 --namespace="${2:-$PDXENG_NAMESPACE}"
+#   kubectl port-forward $1 9990:9990 --namespace=${2}
 # }
 
 # Get all resources (e.g. pod) in all namespaces
