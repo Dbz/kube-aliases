@@ -58,7 +58,11 @@ alias kgac='get_cluster_resources cronjobs'
 alias kgcrd='kubectl get customresourcedefinition'
 
 # daemonsets
+alias kdsds='kubectl describe daemonsets'
+alias keds='kubectl edit daemonsets'
 alias kgds='kubectl get daemonsets'
+alias kgdsy='kubectl get daemonsets -o yaml'
+alias kgads='get_cluster_resources daemonsets'
 
 # Deployments
 alias kdd='kubectl delete deployment'
