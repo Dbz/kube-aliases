@@ -1,7 +1,8 @@
 # kube-aliases
 
-This is an oh-my-zsh plugin to make working with kubernetes easier. It provides
-a bunch of bash aliases and zsh functions. Docs can be found
+This is an oh-my-zsh plugin (or source `kube-aliases.plugin.zsh` for bash) to
+make working with kubernetes easier. It provides a bunch of bash aliases and
+zsh functions. Docs can be found
 [here](https://github.com/Dbz/kube-aliases/blob/master/docs/usage), which
 clarifies all aliases.
 
@@ -9,7 +10,7 @@ clarifies all aliases.
 
 There are a few main features of this plugin. First, there are lots of aliases
 to make working with k8s easier. Second, there are bash functions to help with
-varias tasks such as switching contexts to use different clusters.
+varies tasks such as switching contexts to use different clusters.
 
 ### Aliases
 
@@ -69,6 +70,10 @@ Add `antigen bundle dbz/kube-aliases` to your antigen bundles in your `.zshrc`
 ### Zgen
 
 Add `zgen load dbz/kube-aliases` to your zgen plugins in your `.zshrc`
+
+### Bash
+
+Source `kube-aliases.plugin.zsh` in your `.bashrc`.
 
 ### Aliases for Kubernetes Extensions
 
