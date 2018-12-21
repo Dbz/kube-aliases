@@ -1,11 +1,10 @@
-# #!/bin/bash
-
 # Auto complete, for bash replace zsh with bash
 # For some reason this is sourcing the oh-my-zsh plugin.
 # source <(kubectl completion zsh)
 
 KALIAS=$ZSH_CUSTOM/plugins/zsh-kubernetes
 KRESOURCES=$ZSH_CUSTOM/plugins/zsh-kubernetes/docs/resources
+SHELL_NAME=$(basename $SHELL)
 
 # Contexts
 alias kcc='kubectl config get-contexts'
@@ -191,7 +190,7 @@ kexec () {
   kubectl exec -it $1 ${2:-bash}
 }
 
-# Set and use a new context 
+# Set and use a new context
 knc () {
   kc config set-context $1
   kc config use-context $1
@@ -262,15 +261,27 @@ kgpns () {
 
 # Delete all pods within a namespace.
 kdap () {
-  read "kdelete?This will attempt to delete all pods within the namespace. Do you want to continue?(y/N) "
+
+  if [ $SHELL_NAME = zsh ]; then
+    read "kdelete?This will attempt to delete all pods within the namespace. Do you want to continue?(y/N) "
+  else
+    read -p "This will attempt to delete all pods within the namespace. Do you want to continue?(y/N) " kdelete
+  fi
+
   if [[ "${kdelete}" =~ ^[yY]$ ]]; then
     kubectl delete pods $(kgpns)
   fi
 }
 
-# Drain node 
+# Drain node
 kdrain () {
-  read "kdrainnode? This will drain the node ${1}, delete local data, and ignore daemonsets. Do you want to continue?(y/N) "
+
+  if [ $SHELL_NAME = zsh ]; then
+    read "kdrainnode? This will drain the node ${1}, delete local data, and ignore daemonsets. Do you want to continue?(y/N) "
+  else
+    read -p "This will drain the node ${1}, delete local data, and ignore daemonsets. Do you want to continue?(y/N) " kdrainnode
+  fi
+
   if [[ "${kdrainnode}" =~ ^[yY]$ ]]; then
     kubectl drain ${1} --delete-local-data --force --ignore-daemonsets
   fi
