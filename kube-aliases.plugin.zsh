@@ -1,5 +1,5 @@
-KALIAS=$ZSH_CUSTOM/plugins/zsh-kubernetes
-KRESOURCES=$ZSH_CUSTOM/plugins/zsh-kubernetes/docs/resources
+KALIAS=$ZSH_CUSTOM/plugins/kube-aliases
+KRESOURCES=$ZSH_CUSTOM/plugins/kube-aliases/docs/resources
 SHELL_NAME=$(basename $SHELL)
 
 # Auto complete, for bash replace zsh with bash
