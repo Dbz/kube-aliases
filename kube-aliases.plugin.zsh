@@ -1,10 +1,10 @@
-# Auto complete, for bash replace zsh with bash
-# For some reason this is sourcing the oh-my-zsh plugin.
-# source <(kubectl completion zsh)
-
 KALIAS=$ZSH_CUSTOM/plugins/zsh-kubernetes
 KRESOURCES=$ZSH_CUSTOM/plugins/zsh-kubernetes/docs/resources
 SHELL_NAME=$(basename $SHELL)
+
+# Auto complete, for bash replace zsh with bash
+# For some reason this is sourcing the oh-my-zsh plugin.
+source <(kubectl completion $SHELL_NAME)
 
 # Contexts
 alias kcc='kubectl config get-contexts'
