@@ -310,6 +310,14 @@ kmkconfig () {
   key="$1"
 
   case $key in
+    -a)
+      local resources=(configmap deployment ingress namespace service)
+      for resource in $resources; do
+        _cp_config_sed_config $resource ${2}
+      done
+      shift
+      shift
+      ;;
     -c)
       _cp_config_sed_config configmap ${2}
       shift
@@ -338,6 +346,7 @@ kmkconfig () {
     -h)
 
       echo "Usage: kmkconfig -[c|d|i|n|s] NAME"
+      echo "  -a                           Create all template files"
       echo "  -c                           Create configmap template"
       echo "  -d                           Create deployment template"
       echo "  -h                           Display usage"
