@@ -291,3 +291,63 @@ kdrain () {
     kubectl drain ${1} --delete-local-data --force --ignore-daemonsets
   fi
 }
+
+# Intended to be a private function
+_cp_config_sed_config () {
+  local resource=${1}
+  local name=${2}
+  cp ${KALIAS}/include/${1}.yaml ${name}-${resource}.yaml
+  sed -i "s/CHANGEME/${2}/g" ${name}-${resource}.yaml
+}
+
+# Create config
+kmkconfig () {
+  local configPath=$KALIAS/include/
+  # Structured after stack exchange
+  iPOSITIONAL=()
+  while [[ $# -gt 0 ]]
+  do
+  key="$1"
+
+  case $key in
+    -c)
+      _cp_config_sed_config configmap ${2}
+      shift
+      shift
+      ;;
+    -d)
+      _cp_config_sed_config deployment ${2}
+      shift
+      shift
+      ;;
+    -i)
+      _cp_config_sed_config ingress ${2}
+      shift
+      shift
+      ;;
+    -n)
+      _cp_config_sed_config namespace ${2}
+      shift
+      shift
+      ;;
+    -s)
+      _cp_config_sed_config service ${2}
+      shift
+      shift
+      ;;
+    -h)
+
+      echo "Usage: kmkconfig -[c|d|i|n|s] NAME"
+      echo "  -c                           Create configmap template"
+      echo "  -d                           Create deployment template"
+      echo "  -h                           Display usage"
+      echo "  -i                           Create ingress template"
+      echo "  -n                           Create namespace template"
+      echo "  -s                           Create service template"
+
+      shift # past argument
+      ;;
+  esac
+  done
+  set -- "${POSITIONAL[@]}" # restore positional parameters
+}
