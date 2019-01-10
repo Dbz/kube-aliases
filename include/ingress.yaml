@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: CHANGEME
+  namespace: CHANGEME
+spec:
+  rules:
+  - host: CHANGEME.example.com
+    http:
+      paths:
+      - backend:
+          serviceName: CHANGEME
+          servicePort: 5000
+        path: /
+status:
+  loadBalancer:
+    ingress:
+    - {}

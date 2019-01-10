@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: CHANGEME
+  namespace: CHANGEME
+data:
+  EXAMPLE: "Example"
