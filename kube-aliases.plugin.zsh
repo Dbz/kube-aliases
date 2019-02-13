@@ -37,6 +37,7 @@ alias kgcr='kubectl get clusterroles'
 alias kgcs='kubectl get componentstatus'
 
 # configmaps
+alias kdcm='kubectl delete configmaps'
 alias kdscm='kubectl describe configmaps'
 alias kecm='kubectl edit configmaps'
 alias kgcm='kubectl get configmaps'
