@@ -301,7 +301,7 @@ _cp_config_sed_config () {
 }
 
 # Create config
-kmkconfig () {
+kcon () {
   local configPath=$KALIAS/include/
   # Structured after stack exchange
   iPOSITIONAL=()
