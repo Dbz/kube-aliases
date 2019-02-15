@@ -130,10 +130,19 @@ alias kgny='kubectl get nodes -o yaml'
 alias ktn='kubectl top nodes'
 
 # persistentvolumeclaims
+alias kdpvc='kubectl delete persistentvolumeclaims'
+alias kdspvc='kubectl describe persistentvolumeclaims'
+alias kepvc='kubectl edit persistentvolumeclaims'
+alias kgapvc='get_cluster_resources persistentvolumeclaims'
 alias kgpvc='kubectl get persistentvolumeclaims'
+alias kgpvcy='kubectl get persistentvolumeclaims -o yaml'
 
 # persistentvolumes
+alias kdpv='kubectl delete persistentvolumes'
+alias kdspv='kubectl describe persistentvolumes'
+alias kepv='kubectl edit persistentvolumes'
 alias kgpv='kubectl get persistentvolumes'
+alias kgpvy='kubectl get persistentvolumes -o yaml'
 
 # poddisruptionbudgets
 alias kgpdb='kubectl get poddisruptionbudgets'
