@@ -34,7 +34,6 @@ alias kga='kubectl get --all-namespaces'
 alias kl='kubectl logs'
 alias kcl='kubectl logs'
 alias klf='kubectl logs -f'
-alias kra='krender; kapply'
 
 alias kdd='kubectl delete deployment'
 alias kdsd='kubectl describe deployments'
