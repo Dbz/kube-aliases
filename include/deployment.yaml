@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: CHANGEME
+  namespace: CHANGEME
+  labels:
+    app: CHANGEME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: CHANGEME
+  template:
+    metadata:
+      labels:
+        app: CHANGEME
+    spec:
+      containers:
+      - name: CHANGEME
+        image: CHANGEME:latest
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always
