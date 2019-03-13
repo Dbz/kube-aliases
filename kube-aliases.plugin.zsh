@@ -93,11 +93,11 @@ alias kghpa='kubectl get horizontalpodautoscalers'
 
 # Ingress
 alias kdi='kubectl delete ingress'
-alias kgi='kubectl get ingress'
-alias kei='kubectl edit ingress'
-alias kgiy='kubectl get ingress -o yaml'
 alias kdsi='kubectl describe ingress'
+alias kei='kubectl edit ingress'
 alias kgai='get_cluster_resources ingress'
+alias kgi='kubectl get ingress'
+alias kgiy='kubectl get ingress -o yaml'
 
 # Jobs
 alias kdj='kubectl delete job'

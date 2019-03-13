@@ -9,8 +9,8 @@ clarifies all aliases.
 ## Usage
 
 There are a few main features of this plugin. First, there are lots of aliases
-to make working with k8s easier. Second, there are bash functions to help with
-varies tasks such as switching contexts to use different clusters.
+to make working with Kubernetes easier. Second, there are bash functions to
+help with varies tasks such as switching contexts to use different clusters.
 
 ### Aliases
 
@@ -20,35 +20,25 @@ To see a full list of aliases, use
 khelp usage
 ```
 
-Some common aliases
+In general and when it makes sense, aliases follow the following conventions.
 
 ```bash
-alias k='kubectl'
-alias kc='kubectl'
-alias kube='kubectl'
-alias kd='kubectl delete'
-alias kds='kubectl describe service'
-alias ke='kubectl edit'
-alias kg='kubectl get'
-alias kga='kubectl get --all-namespaces'
-alias kl='kubectl logs'
-alias kcl='kubectl logs'
-alias klf='kubectl logs -f'
-alias kra='krender; kapply'
-
-alias kdd='kubectl delete deployment'
-alias kdsd='kubectl describe deployments'
-alias ked='kubectl edit deployments'
-alias kgd='kubectl get deployments'
-alias kgdy='kubectl get deployments -o yaml'
-
-alias kaf='kubectl apply -f'
-alias kcf='kubectl create -f'
-alias kdf='kubectl delete -f'
-alias kef='kubectl edit -f'
-alias kdsf='kubectl describe -f'
-alias kgf='kubectl get -f'
+k           # kubectl
+kd<r>       # kubectl delete <resource>, e.g. kgp for kubectl delete pods
+kds<r>      # kubectl describe <resource>, e.g. kdsp for kubectl describe pod
+ke<r>       # kubectl edit <resource>, e.g. kgp for kubectl edit pods
+kg<r>       # kubectl get <resource>, e.g. kgp for kubectl get pods
+kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
+kl          # kubectl logs <podname>
+klf         # kubectl logs -f <podname>: i.e. watch logs live
 ```
+
+For a more detailed list of aliases, view the [docs](https://github.com/Dbz/kube-aliases/blob/master/docs/usage).
+
+Not everything is currently implemented, but more and more is being added to
+the list. If something is missing that is desired, feel free to submit a pull
+request.
+
 
 ## Installation
 
@@ -105,4 +95,4 @@ alias ktp='kubectl top pods'
 
 If there is problems with autocomplete, it may be that kubectl is not on the
 path when the plugin is loaded. To fix, load plugins after adding kubectl to
-path.
+%% path.
