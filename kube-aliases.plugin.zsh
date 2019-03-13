@@ -355,7 +355,7 @@ kcon () {
       ;;
     -h)
 
-      echo "Usage: kmkconfig -[c|d|i|n|s] NAME"
+      echo "Usage: kcon -[c|d|i|n|s] NAME"
       echo "  -a                           Create all template files"
       echo "  -c                           Create configmap template"
       echo "  -d                           Create deployment template"
