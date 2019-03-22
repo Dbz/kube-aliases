@@ -33,6 +33,22 @@ kl          # kubectl logs <podname>
 klf         # kubectl logs -f <podname>: i.e. watch logs live
 ```
 
+There is also some other useful commands such as the following:
+
+```bash
+kcon       # create configuration files
+kdap       # delete all pods within a namespace
+kdrain     # drain a node
+kexec      # execute a command in a specified pod,
+           # default drops user into a shell
+kfind      # use a regular expression to find items across everything except
+           # custom resources
+kgpns      # Get just pod names in a namespace
+kpfind     # Search through pods with regular expressions
+krd        # restart a depoloyment
+kstatus    # search across namespaces to find pods statuses
+```
+
 For a more detailed list of aliases, view the [docs](https://github.com/Dbz/kube-aliases/blob/master/docs/usage).
 
 Not everything is currently implemented, but more and more is being added to

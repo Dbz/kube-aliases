@@ -1,21 +1,21 @@
+create configuration files (all, deployment, ingress, namespace, service).
+    kcon -[a|d|i|n|s]
 Delete all pods in a namespace
     kdap 
+drain a node
+    kdrain node
 Run a command in a container or enter the container.
     kexec pod [command]
 Find everything with (e.g. all resources on a node)
     kfind regular expression 
-Execute a command in a specified pod, default drops user into the shell
-    kcexec podname [command]
-Get all resources (e.g. pod) in all namespaces
-    get_cluster_resources resource [any other arguements]
-Print out aliases or resources for kubernetes
-    khelp (commands|cmd|resources|res)
-Print out the names of all pods in a namespace
+Get just pod names in a namespace
     kgpns
 Find pods with regular expressions
     kpfind
 Start a restart on pods for a given deployment, will follow the rolling release policy
     krd 
+Search across namespaces to find pod statuses
+    kstatus -[C|c|f|p|r|s|u]
 
 contexts:
     kcc                             kubectl config get-contexts

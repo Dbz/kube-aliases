@@ -289,6 +289,17 @@ kstatus () {
       kpfind Unknown
       shift
       ;;
+    -h) 
+      echo "Usage: kstatus -[C|c|f|p|r|s|u]"
+      echo "  -C                           Completed"
+      echo "  -c                           CrashLoopBackOff"
+      echo "  -f                           Failed"
+      echo "  -p                           Pending"
+      echo "  -r                           Running"
+      echo "  -s                           Succeeded"
+      echo "  -u                           Unknown"
+      shift
+      ;;
   esac
   done
   set -- "${POSITIONAL[@]}" # restore positional parameters
@@ -399,7 +410,6 @@ kcon () {
       shift
       ;;
     -h)
-
       echo "Usage: kcon -[c|d|i|n|s] NAME"
       echo "  -a                           Create all template files"
       echo "  -c                           Create configmap template"
