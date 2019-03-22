@@ -251,6 +251,51 @@ kpfind () {
 
 }
 
+# Search pods using regular expression
+kstatus () {
+
+  # Structured after stack exchange
+  iPOSITIONAL=()
+  while [[ $# -gt 0 ]]
+  do
+  key="$1"
+
+  case $key in
+    -C) 
+      kpfind Completed
+      shift
+      ;;
+    -c) 
+      kpfind CrashLoopBackOff
+      shift
+      ;;
+    -f) 
+      kpfind Failed
+      shift
+      ;;
+    -p) 
+      kpfind Pending
+      shift
+      ;;
+    -r) 
+      kpfind Running
+      shift
+      ;;
+    -s) 
+      kpfind Succeded
+      shift
+      ;;
+    -u) 
+      kpfind Unknown
+      shift
+      ;;
+  esac
+  done
+  set -- "${POSITIONAL[@]}" # restore positional parameters
+
+}
+
+
 # Display help
 khelp () {
 
