@@ -105,10 +105,10 @@ alias ktn='kubectl top nodes'
 alias ktp='kubectl top pods'
 ```
 
-### Trouble shooting
+### Trouble Shooting
 
 #### Autocomplete
 
 If there is problems with autocomplete, it may be that kubectl is not on the
 path when the plugin is loaded. To fix, load plugins after adding kubectl to
-%% path.
+path.
