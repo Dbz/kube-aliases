@@ -45,7 +45,7 @@ kfind      # use a regular expression to find items across everything except
            # custom resources
 kgpns      # Get just pod names in a namespace
 kpfind     # Search through pods with regular expressions
-krd        # restart a depoloyment
+krd        # restart a deployment
 kstatus    # search across namespaces to find pods statuses
 ```
 
