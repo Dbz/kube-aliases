@@ -182,7 +182,11 @@ alias kgrb='kubectl get rolebindings'
 alias kgr='kubectl get roles'
 
 # secrets
-alias kgs='kubectl get secrets'
+alias kdssc='kubectl describe secrets'
+alias kesc='kubectl edit secrets'
+alias kgasc='get_cluster_resources secrets'
+alias kgsc='kubectl get secrets'
+alias kgscy='kubectl get secrets -o yaml'
 
 # serviceaccounts
 alias kgsa='kubectl get serviceaccounts'
