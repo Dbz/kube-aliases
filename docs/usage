@@ -33,7 +33,6 @@ core:
     kl                              kubectl logs
     klf                             kubectl logs -f
     kns                             kubens
-    kra                             krender; kapply
 
 certificatesigningrequests:
     kgcsr                           kubectl get certificatesigningrequests
@@ -52,13 +51,13 @@ configmaps:
     kdscm                           kubectl describe configmaps
     kecm                            kubectl edit configmaps
     kgcm                            kubectl get configmaps
-    kgcm                            kubectl get configmaps
     kgcmy                           kubectl get configmaps -o wide
 
 controllerrevisions:
     kgcrv                           kubectl get controllerrevisions
 
 cronjobs:
+    kdc                             kubectl delete cronjobs
     kdsc                            kubectl describe cronjobs
     kec                             kubectl edit cronjobs
     kgc                             kubectl get cronjobs
@@ -70,6 +69,7 @@ customresourcedefinition:
     kgcrd                           kubectl get customresourcedefinition
 
 daemonsets:
+    kdds                            kubectl delete daemonsets
     kdsds                           kubectl describe daemonsets
     keds                            kubectl edit daemonsets
     kgds                            kubectl get daemonsets
@@ -198,6 +198,7 @@ serviceaccounts:
     kgsa                            kubectl get serviceaccounts
 
 services:
+    kds                             kubectl delete service
     kdss                            kubectl describe services
     kes                             kubectl edit services
     kgas                            kubectl get services -o wide --all-namespaces

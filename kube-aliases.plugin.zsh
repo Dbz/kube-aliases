@@ -22,7 +22,6 @@ alias kga='kubectl get --all-namespaces'
 alias kl='kubectl logs'
 alias kcl='kubectl logs'
 alias klf='kubectl logs -f'
-alias kra='krender; kapply'
 
 # certificatesigningrequests
 alias kgcsr='kubectl get certificatesigningrequests'
@@ -48,6 +47,7 @@ alias kgacm='get_cluster_resources configmaps'
 alias kgcrv='kubectl get controllerrevisions'
 
 # Cronjobs
+alias kdc='kubectl delete cronjobs'
 alias kdsc='kubectl describe cronjobs'
 alias kec='kubectl edit cronjobs'
 alias kgc='kubectl get cronjobs'
@@ -59,6 +59,7 @@ alias kgac='get_cluster_resources cronjobs'
 alias kgcrd='kubectl get customresourcedefinition'
 
 # daemonsets
+alias kdds='kubectl delete daemonsets'
 alias kdsds='kubectl describe daemonsets'
 alias keds='kubectl edit daemonsets'
 alias kgds='kubectl get daemonsets'
@@ -192,6 +193,7 @@ alias kgscy='kubectl get secrets -o yaml'
 alias kgsa='kubectl get serviceaccounts'
 
 # Services
+alias kds='kubectl delete services'
 alias kdss='kubectl describe services'
 alias kes='kubectl edit services'
 alias kgas='get_cluster_resources services'
