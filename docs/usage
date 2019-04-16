@@ -1,21 +1,21 @@
+create configuration files (all, deployment, ingress, namespace, service).
+    kcon -[a|d|i|n|s]
 Delete all pods in a namespace
     kdap 
+drain a node
+    kdrain node
 Run a command in a container or enter the container.
     kexec pod [command]
 Find everything with (e.g. all resources on a node)
     kfind regular expression 
-Execute a command in a specified pod, default drops user into the shell
-    kcexec podname [command]
-Get all resources (e.g. pod) in all namespaces
-    get_cluster_resources resource [any other arguements]
-Print out aliases or resources for kubernetes
-    khelp (commands|cmd|resources|res)
-Print out the names of all pods in a namespace
+Get just pod names in a namespace
     kgpns
 Find pods with regular expressions
     kpfind
 Start a restart on pods for a given deployment, will follow the rolling release policy
     krd 
+Search across namespaces to find pod statuses
+    kstatus -[C|c|f|p|r|s|u]
 
 contexts:
     kcc                             kubectl config get-contexts
@@ -33,7 +33,6 @@ core:
     kl                              kubectl logs
     klf                             kubectl logs -f
     kns                             kubens
-    kra                             krender; kapply
 
 certificatesigningrequests:
     kgcsr                           kubectl get certificatesigningrequests
@@ -48,15 +47,21 @@ componentstatuses:
     kgcs                            kubectl get componentstatus
 
 configmaps:
+    kdcm                            kubectl delete configmaps
+    kdscm                           kubectl describe configmaps
+    kecm                            kubectl edit configmaps
     kgcm                            kubectl get configmaps
+    kgcmy                           kubectl get configmaps -o wide
 
 controllerrevisions:
     kgcrv                           kubectl get controllerrevisions
 
 cronjobs:
+    kdc                             kubectl delete cronjobs
     kdsc                            kubectl describe cronjobs
     kec                             kubectl edit cronjobs
     kgc                             kubectl get cronjobs
+    kgcw                            watch kubectl get cronjobs
     kgcy                            kubectl get cronjobs -o yaml
     kgac                            kubectl get cronjobs -o wide --all-namespaces
     
@@ -64,13 +69,19 @@ customresourcedefinition:
     kgcrd                           kubectl get customresourcedefinition
 
 daemonsets:
+    kdds                            kubectl delete daemonsets
+    kdsds                           kubectl describe daemonsets
+    keds                            kubectl edit daemonsets
     kgds                            kubectl get daemonsets
+    kgdsw                           watch kubectl get daemonsets
+    kgdsy                           kubectl get daemonsets -o yaml
 
 deployments:
     kdd                             kubectl delete deployments
     kdsd                            kubectl describe deployments
     ked                             kubectl edit deployments
     kgd                             kubectl get deployments 
+    kgdw                            watch kubectl get deployments
     kgdy                            kubectl get deployments -o yaml
     
 endpoints:
@@ -92,17 +103,18 @@ horizontalpodautoscalers:
 
 ingress:
     kdi                             kubectl delete ingress
-    kgi                             kubectl get ingress
-    kgiy                            kubectl get ingress -o yaml
     kdsi                            kubectl describe ingress
     kei                             kubectl edit ingress
     kgai                            kubectl get ingress -o wide --all-namespaces
+    kgi                             kubectl get ingress
+    kgiy                            kubectl get ingress -o yaml
     
 jobs:
     kdj                             kubectl delete job
     kdsj                            kubectl describe job
     kej                             kubectl edit jobs
     kgj                             kubectl get jobs
+    kgjw                            watch kubectl get jobs
     kgjy                            kubectl get jobs -o yaml
     kgaj                            kubectl get jobs -o wide --all-namespaces
     
@@ -128,10 +140,19 @@ nodes:
     ktn                             kubectl top nodes
     
 persistentvolumeclaims:
+    kdpvc                           kubectl delete persistentvolumeclaims
+    kdspvc                          kubectl describe persistentvolumeclaims
+    kepvc                           kubectl edit persistentvolumeclaims
+    kgapvc                          get_cluster_resources persistentvolumeclaims
     kgpvc                           kubectl get persistentvolumeclaims
+    kgpvcy                          kubectl get persistentvolumeclaims -o yaml
 
 persistentvolumes:
+    kdpv                            kubectl delete persistentvolumes
+    kdspv                           kubectl describe persistentvolumes
+    kepv                            kubectl edit persistentvolumes
     kgpv                            kubectl get persistentvolumes
+    kgpvy                           kubectl get persistentvolumes -o yaml
 
 poddisruptionbudgets:
     kgpdb                           kubectl get poddisruptionbudgets
@@ -145,6 +166,7 @@ pods:
     kep                             kubectl edit pods
     kgap                            kubectl get pods  -o wide --all-namespaces
     kgp                             kubectl get pods
+    kgpw                            watch kubectl get pods
     kgpy                            kubectl get pods -o yaml
     ktp                             kubectl top pods
     
@@ -176,6 +198,7 @@ serviceaccounts:
     kgsa                            kubectl get serviceaccounts
 
 services:
+    kds                             kubectl delete service
     kdss                            kubectl describe services
     kes                             kubectl edit services
     kgas                            kubectl get services -o wide --all-namespaces

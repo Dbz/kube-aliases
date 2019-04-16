@@ -22,7 +22,6 @@ alias kga='kubectl get --all-namespaces'
 alias kl='kubectl logs'
 alias kcl='kubectl logs'
 alias klf='kubectl logs -f'
-alias kra='krender; kapply'
 
 # certificatesigningrequests
 alias kgcsr='kubectl get certificatesigningrequests'
@@ -48,6 +47,7 @@ alias kgacm='get_cluster_resources configmaps'
 alias kgcrv='kubectl get controllerrevisions'
 
 # Cronjobs
+alias kdc='kubectl delete cronjobs'
 alias kdsc='kubectl describe cronjobs'
 alias kec='kubectl edit cronjobs'
 alias kgc='kubectl get cronjobs'
@@ -59,6 +59,7 @@ alias kgac='get_cluster_resources cronjobs'
 alias kgcrd='kubectl get customresourcedefinition'
 
 # daemonsets
+alias kdds='kubectl delete daemonsets'
 alias kdsds='kubectl describe daemonsets'
 alias keds='kubectl edit daemonsets'
 alias kgds='kubectl get daemonsets'
@@ -93,11 +94,11 @@ alias kghpa='kubectl get horizontalpodautoscalers'
 
 # Ingress
 alias kdi='kubectl delete ingress'
-alias kgi='kubectl get ingress'
-alias kei='kubectl edit ingress'
-alias kgiy='kubectl get ingress -o yaml'
 alias kdsi='kubectl describe ingress'
+alias kei='kubectl edit ingress'
 alias kgai='get_cluster_resources ingress'
+alias kgi='kubectl get ingress'
+alias kgiy='kubectl get ingress -o yaml'
 
 # Jobs
 alias kdj='kubectl delete job'
@@ -182,12 +183,17 @@ alias kgrb='kubectl get rolebindings'
 alias kgr='kubectl get roles'
 
 # secrets
-alias kgs='kubectl get secrets'
+alias kdssc='kubectl describe secrets'
+alias kesc='kubectl edit secrets'
+alias kgasc='get_cluster_resources secrets'
+alias kgsc='kubectl get secrets'
+alias kgscy='kubectl get secrets -o yaml'
 
 # serviceaccounts
 alias kgsa='kubectl get serviceaccounts'
 
 # Services
+alias kds='kubectl delete services'
 alias kdss='kubectl describe services'
 alias kes='kubectl edit services'
 alias kgas='get_cluster_resources services'
@@ -250,6 +256,62 @@ kpfind () {
     $KALIAS/src/kpfind.awk -v regex="${1}")
 
 }
+
+# Search pods using regular expression
+kstatus () {
+
+  # Structured after stack exchange
+  iPOSITIONAL=()
+  while [[ $# -gt 0 ]]
+  do
+  key="$1"
+
+  case $key in
+    -C) 
+      kpfind Completed
+      shift
+      ;;
+    -c) 
+      kpfind CrashLoopBackOff
+      shift
+      ;;
+    -f) 
+      kpfind Failed
+      shift
+      ;;
+    -p) 
+      kpfind Pending
+      shift
+      ;;
+    -r) 
+      kpfind Running
+      shift
+      ;;
+    -s) 
+      kpfind Succeded
+      shift
+      ;;
+    -u) 
+      kpfind Unknown
+      shift
+      ;;
+    -h) 
+      echo "Usage: kstatus -[C|c|f|p|r|s|u]"
+      echo "  -C                           Completed"
+      echo "  -c                           CrashLoopBackOff"
+      echo "  -f                           Failed"
+      echo "  -p                           Pending"
+      echo "  -r                           Running"
+      echo "  -s                           Succeeded"
+      echo "  -u                           Unknown"
+      shift
+      ;;
+  esac
+  done
+  set -- "${POSITIONAL[@]}" # restore positional parameters
+
+}
+
 
 # Display help
 khelp () {
@@ -354,7 +416,6 @@ kcon () {
       shift
       ;;
     -h)
-
       echo "Usage: kcon -[c|d|i|n|s] NAME"
       echo "  -a                           Create all template files"
       echo "  -c                           Create configmap template"
