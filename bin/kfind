@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Search all resources using regular expression
+
+# kubectl get all --all-namespaces | grep -i -E --color=always "${@}|$"
+sed 1d $KRESOURCES | while read resource; do
+  kubectl get $resource --all-namespaces -o wide 2>/dev/null | \
+    kfind.awk -v regex="${1}" -v resourcetype="${resource}"
+done
+
+#   local custom=$(kubectl get customresourcedefinition)
+#   echo $custom | while read resource; do
+#     kubectl get "${resource}" --all-namespaces -o wide | \
+#       $KALIAS/src/kfind.awk -v regex="${1}" -v resourcetype="${resource}"
+# done

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Get all resources (e.g. pod) in all namespaces
+
+kubectl get $1 -o wide --all-namespaces ${@:2}
