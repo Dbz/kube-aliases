@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Search pods using regular expression
+
+column -t <<< $(kubectl get pods --all-namespaces -o wide | \
+  kpfind.awk -v regex="${1}")

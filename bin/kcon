@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Create config
+
+configPath=$KALIAS/include/
+
+_cp_config_sed_config () {
+  local resource=${1}
+  local name=${2}
+  cp ${configPath}${1}.yaml ${name}-${resource}.yaml
+  sed -i "s/CHANGEME/${2}/g" ${name}-${resource}.yaml
+}
+
+
+# Structured after stack exchange
+iPOSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+  -a)
+    resources=("configmap" 
+      "deployment"
+      "ingress"
+      "namespace"
+      "service")
+    for resource in ${resources[@]}; do
+      _cp_config_sed_config $resource ${2}
+    done
+    shift
+    shift
+    ;;
+  -c)
+    _cp_config_sed_config configmap ${2}
+    shift
+    shift
+    ;;
+  -d)
+    _cp_config_sed_config deployment ${2}
+    shift
+    shift
+    ;;
+  -i)
+    _cp_config_sed_config ingress ${2}
+    shift
+    shift
+    ;;
+  -n)
+    _cp_config_sed_config namespace ${2}
+    shift
+    shift
+    ;;
+  -s)
+    _cp_config_sed_config service ${2}
+    shift
+    shift
+    ;;
+  -h)
+    echo "Usage: kcon -[c|d|i|n|s] NAME"
+    echo "  -a                           Create all template files"
+    echo "  -c                           Create configmap template"
+    echo "  -d                           Create deployment template"
+    echo "  -h                           Display usage"
+    echo "  -i                           Create ingress template"
+    echo "  -n                           Create namespace template"
+    echo "  -s                           Create service template"
+
+    shift # past argument
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
