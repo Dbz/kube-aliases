@@ -1,52 +1,48 @@
 #!/bin/bash
 
-# Search pods using regular expression
+function usage {
+  echo "Usage: kstatus -[C|c|f|p|r|s|u]"
+  echo "  -C                           Completed"
+  echo "  -c                           CrashLoopBackOff"
+  echo "  -f                           Failed"
+  echo "  -p                           Pending"
+  echo "  -r                           Running"
+  echo "  -s                           Succeeded"
+  echo "  -u                           Unknown"
+}
 
-iPOSITIONAL=()
-while [[ $# -gt 0 ]]
-do
-key="$1"
-
-case $key in
-  -C) 
-    kpfind Completed
-    shift
-    ;;
-  -c) 
-    kpfind CrashLoopBackOff
-    shift
-    ;;
-  -f) 
-    kpfind Failed
-    shift
-    ;;
-  -p) 
-    kpfind Pending
-    shift
-    ;;
-  -r) 
-    kpfind Running
-    shift
-    ;;
-  -s) 
-    kpfind Succeded
-    shift
-    ;;
-  -u) 
-    kpfind Unknown
-    shift
-    ;;
-  -h) 
-    echo "Usage: kstatus -[C|c|f|p|r|s|u]"
-    echo "  -C                           Completed"
-    echo "  -c                           CrashLoopBackOff"
-    echo "  -f                           Failed"
-    echo "  -p                           Pending"
-    echo "  -r                           Running"
-    echo "  -s                           Succeeded"
-    echo "  -u                           Unknown"
-    shift
-    ;;
-esac
+while getopts "acCfprsu?h" opt; do
+  case $opt in
+    a)
+      flag="-a"
+      ;;
+    c)
+      search=CrashLoopBackOff
+      ;;
+    C)
+      search=Completed
+      ;;
+    f)
+      search=Failed
+      ;;
+    p)
+      search=Pending
+      ;;
+    r)
+      search=Running
+      ;;
+    s)
+      search=Succeded
+      ;;
+    u)
+      search=Unknown
+      ;;
+    h|\?)
+      # echo "Invalid option: -$OPTARG" >&2
+      usage
+      exit 0
+      ;;
+  esac
 done
-set -- "${POSITIONAL[@]}" # restore positional parameters
+
+kpfind ${flag} ${search}
