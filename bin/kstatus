@@ -1,7 +1,8 @@
 #!/bin/bash
 
 function usage {
-  echo "Usage: kstatus -[C|c|f|p|r|s|u]"
+  echo "Usage: kstatus -[a|C|c|f|p|r|s|u]"
+  echo "  -a                           Search all namespaces"
   echo "  -C                           Completed"
   echo "  -c                           CrashLoopBackOff"
   echo "  -f                           Failed"
@@ -18,24 +19,31 @@ while getopts "acCfprsu?h" opt; do
       ;;
     c)
       search=CrashLoopBackOff
+      rflag=true
       ;;
     C)
       search=Completed
+      rflag=true
       ;;
     f)
       search=Failed
+      rflag=true
       ;;
     p)
       search=Pending
+      rflag=true
       ;;
     r)
       search=Running
+      rflag=true
       ;;
     s)
       search=Succeded
+      rflag=true
       ;;
     u)
       search=Unknown
+      rflag=true
       ;;
     h|\?)
       # echo "Invalid option: -$OPTARG" >&2
@@ -44,5 +52,12 @@ while getopts "acCfprsu?h" opt; do
       ;;
   esac
 done
+
+if ! "$rflag"
+then
+  echo test
+  usage
+  exit 0
+fi
 
 kpfind ${flag} ${search}
