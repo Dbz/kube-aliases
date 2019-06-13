@@ -6,13 +6,14 @@ function usage {
   echo "  -C                           Completed"
   echo "  -c                           CrashLoopBackOff"
   echo "  -f                           Failed"
+  echo "  -i                           ImagePullBackOff"
   echo "  -p                           Pending"
   echo "  -r                           Running"
   echo "  -s                           Succeeded"
   echo "  -u                           Unknown"
 }
 
-while getopts "acCfprsu?h" opt; do
+while getopts "acCfiprsu?h" opt; do
   case $opt in
     a)
       flag="-a"
@@ -27,6 +28,10 @@ while getopts "acCfprsu?h" opt; do
       ;;
     f)
       search=Failed
+      rflag=true
+      ;;
+    i)
+      search=ImagePullBackOff
       rflag=true
       ;;
     p)
