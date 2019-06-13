@@ -2,7 +2,12 @@
 
 BEGIN { RESOURCES = "true" }
 
-/NAMESPACE/ { title = $1 " " $2  " " $4 " " $5 " " $6 " " $8 }
+/NAME/ { title = $1 " " $2 " " $3 " " $4 " " $5 " " $7 }
+/NAMESPACE/ { 
+  title = $1 " " $2  " " $4 " " $5 " " $6 " " $8 
+  all_namespaces = "true"
+}
+
 $0 ~ regex { 
 
   # If we have found a match and have not printed a title
@@ -13,5 +18,10 @@ $0 ~ regex {
     RESOURCES = ""
   }
 
-  print $1 " " $2  " " $4 " " $5 " " $6 " " $8 
+  if (all_namespaces) {
+    print $1 " " $2  " " $4 " " $5 " " $6 " " $8 
+  }
+  else {
+    print $1 " " $2 " " $3 " " $4 " " $5 " " $7 
+  }
 }
