@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# mkkfunc
+
+# Description: Automatically generate functions. Currently a test of concept
+
+# Create aliases of the form kubectl ----- -f
+function mkkf {
+
+  local actions=(apply create delete edit describe get)
+
+  for action in ${actions[*]}
+  do
+
+    if [ "${action}" = "delete" ]
+    then
+      local file=bin/kdelf
+    else
+      local file=bin/"k${action:0:1}f"
+    fi
+
+    # TODO: Test for existence/conflict
+    sed "s/CHANGEME/${action}/" include/kf > "${file}"
+    chmod +x "${file}"
+
+  done
+
+
+}
+
+# TODO
+function usage {
+  echo "mk-functions"
+  echo "-f            create functions to apply files for apply, create,"
+  echo "              delete, edit, describe, get"
+}
+
+
+while getopts "f?h" opt; do
+  case $opt in
+    f)
+      mkkf
+      ;;
+    h|\?)
+      # echo "Invalid option: -$OPTARG" >&2
+      usage
+      exit 0
+      ;;
+  esac
+done
+
