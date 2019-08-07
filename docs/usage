@@ -52,6 +52,7 @@ configmaps:
     kecm                            kubectl edit configmaps
     kgcm                            kubectl get configmaps
     kgcmy                           kubectl get configmaps -o wide
+    kgacm                           kubectl get configmaps -o wide --all-namespaces
 
 controllerrevisions:
     kgcrv                           kubectl get controllerrevisions
@@ -64,7 +65,7 @@ cronjobs:
     kgcw                            watch kubectl get cronjobs
     kgcy                            kubectl get cronjobs -o yaml
     kgac                            kubectl get cronjobs -o wide --all-namespaces
-    
+
 customresourcedefinition:
     kgcrd                           kubectl get customresourcedefinition
 
@@ -75,6 +76,7 @@ daemonsets:
     kgds                            kubectl get daemonsets
     kgdsw                           watch kubectl get daemonsets
     kgdsy                           kubectl get daemonsets -o yaml
+    kgads                           kubectl get daemonsets -o wide --all-namespaces
 
 deployments:
     kdd                             kubectl delete deployments
@@ -143,7 +145,7 @@ persistentvolumeclaims:
     kdpvc                           kubectl delete persistentvolumeclaims
     kdspvc                          kubectl describe persistentvolumeclaims
     kepvc                           kubectl edit persistentvolumeclaims
-    kgapvc                          get_cluster_resources persistentvolumeclaims
+    kgapvc                          kubectl get persistentvolumeclaims -o wide --all-namespaces
     kgpvc                           kubectl get persistentvolumeclaims
     kgpvcy                          kubectl get persistentvolumeclaims -o yaml
 
@@ -193,6 +195,11 @@ roles:
 
 secrets:
     kgs                             kubectl get secrets
+    kdssc                           kubectl describe secrets
+    kesc                            kubectl edit secrets
+    kgasc                           kubectl get secrets -o wide --all-namespaces
+    kgsc                            kubectl get secrets
+    kgscy                           kubectl get secrets -o yaml
 
 serviceaccounts:
     kgsa                            kubectl get serviceaccounts
