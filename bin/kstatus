@@ -5,6 +5,7 @@ function usage {
   echo "  -a                           Search all namespaces"
   echo "  -C                           Completed"
   echo "  -c                           CrashLoopBackOff"
+  echo "  -e                           Evicted"
   echo "  -f                           Failed"
   echo "  -i                           ImagePullBackOff"
   echo "  -p                           Pending"
@@ -13,7 +14,7 @@ function usage {
   echo "  -u                           Unknown"
 }
 
-while getopts "acCfiprsu?h" opt; do
+while getopts "acCefiprsu?h" opt; do
   case $opt in
     a)
       flag="-a"
@@ -24,6 +25,10 @@ while getopts "acCfiprsu?h" opt; do
       ;;
     C)
       search=Completed
+      rflag=true
+      ;;
+    e)
+      search=Evicted
       rflag=true
       ;;
     f)
