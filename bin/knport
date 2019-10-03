@@ -42,7 +42,7 @@ function available_port {
   contains_element "${1}" "${nodeports[@]}"
   if [[ $? == 0 ]]; then
     echo "Port is in use."
-    kubectl get services --all-namespaces | ./kfind.awk -v regex="NodePort.*${1}" -v resourcetype="services"
+    kubectl get services --all-namespaces | kfind.awk -v regex="NodePort.*${1}" -v resourcetype="services"
   else
       echo "Port is available."
   fi
