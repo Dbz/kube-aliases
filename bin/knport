@@ -16,12 +16,14 @@ function usage {
   echo "  -g                   generate available port number"
 }
 
+
 function contains_element {
   local e set="${1}"
   shift
   for e; do [[ "${e}" == "${set}" ]] && return 0; done
   return 1
 }
+
 
 # Check if nodeport is available
 function available_port {
@@ -61,6 +63,7 @@ function mkport {
   exit 1
 }
 
+
 # TODO pretty print
 function find_collisions {
   read_nodeports
@@ -91,6 +94,7 @@ while getopts "acg?h" opt; do
       ;;
   esac
 done
+
 
 if [ -n "${show_all}" ]; then
   output=$(kubectl get --all-namespaces services \
