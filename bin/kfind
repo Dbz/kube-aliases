@@ -2,14 +2,58 @@
 
 # Search all resources using regular expression
 
-# kubectl get all --all-namespaces | grep -i -E --color=always "${@}|$"
-sed 1d $KRESOURCES | while read resource; do
-  kubectl get $resource --all-namespaces -o wide 2>/dev/null | \
-    kfind.awk -v regex="${1}" -v resourcetype="${resource}"
+# TODO
+function usage {
+  echo "Usage: kfind [a] regex"
+  echo "Use regex to search across all resources in current namespace."
+  echo "  -a                   search across all resources in cluster"
+}
+
+while getopts "a:?h" opt; do
+  case $opt in
+    a)
+      regex=$OPTARG
+      ;;
+    h|\?)
+      # echo "Invalid option: -$OPTARG" >&2
+      usage
+      exit 0
+      ;;
+  esac
 done
 
-#   local custom=$(kubectl get customresourcedefinition)
-#   echo $custom | while read resource; do
-#     kubectl get "${resource}" --all-namespaces -o wide | \
-#       $KALIAS/src/kfind.awk -v regex="${1}" -v resourcetype="${resource}"
-# done
+# All namespaces
+if [ -n "${regex}" ]; then
+
+
+  for i in $(kubectl api-resources --verbs=list,get | tail +2 | cut -d ' ' -f -1 | sort | uniq)
+  do
+      output=$(kubectl get --ignore-not-found "${i}" --all-namespaces -o wide | \
+                kfind.awk -v regex="${regex}" -v resourcetype="${i}")
+
+    if [[ "${output}" ]]; then
+      echo "${output}"
+      echo ""
+    fi
+
+  done
+
+
+# Current namespace
+else
+
+
+  for i in $(kubectl api-resources --verbs=list,get --namespaced=true | tail +2 | cut -d ' ' -f -1 | sort | uniq)
+  do
+    output=$(kubectl get --ignore-not-found "${i}" -o wide | \
+              kfind.awk -v regex="${1}" -v resourcetype="${i}")
+
+    if [[ "${output}" ]]; then
+      echo "${output}"
+      echo ""
+    fi
+
+  done
+
+fi
+
