@@ -27,12 +27,24 @@ function contains_element {
 
 # Check if nodeport is available
 function available_port {
+
+  if [[ -n ${1//[0-9]/} ]]; then
+    echo "Input needs to be an integer"
+    exit 1
+  fi
+  if [ "${1}" -lt "${np_default_min}" ] || [ "${1}" -gt "${np_default_max}" ]; then
+    echo "Port needs to be between ${np_default_min} and ${np_default_max}"
+    exit 1
+  fi
+
   read_nodeports
+
   contains_element "${1}" "${nodeports[@]}"
   if [[ $? == 0 ]]; then
-    echo "Is contained in"
+    echo "Port is in use."
+    kubectl get services --all-namespaces | ./kfind.awk -v regex="NodePort.*${1}" -v resourcetype="services"
   else
-    echo "Is not contained in"
+      echo "Port is available."
   fi
   exit 0
 }
@@ -64,7 +76,7 @@ function mkport {
 }
 
 
-# TODO pretty print
+# TODO pretty print with what namespaces and what not
 function find_collisions {
   read_nodeports
   printf '%s\n' "${nodeports[@]}"|awk '!($0 in seen){seen[$0];next} 1'
