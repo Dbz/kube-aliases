@@ -76,7 +76,11 @@ function mkport {
 }
 
 
+<<<<<<< HEAD
 # TODO pretty print with what namespaces and what not
+=======
+# TODO pretty print
+>>>>>>> e827a13 (formatting)
 function find_collisions {
   read_nodeports
   printf '%s\n' "${nodeports[@]}"|awk '!($0 in seen){seen[$0];next} 1'
