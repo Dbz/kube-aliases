@@ -9,7 +9,7 @@ function usage {
 }
 
 
-while getopts "a:?h" opt; do
+while getopts "ra:?h" opt; do
   case $opt in
     a)
       regex=$OPTARG
