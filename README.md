@@ -8,30 +8,24 @@ clarifies all aliases.
 
 ## Usage
 
-There are a few main features of this plugin. First, there are lots of aliases
-to make working with Kubernetes easier. Second, there are bash functions to
-help with varies tasks such as switching contexts to use different clusters.
-
 ### Aliases
 
-To see a full list of aliases, use
-
-```bash
-khelp usage
-```
+For help, run `khelp`:
 
 In general and when it makes sense, aliases follow the following conventions.
 
 ```bash
 k           # kubectl
-kd<r>       # kubectl delete <resource>, e.g. kdp for kubectl delete pods
-kds<r>      # kubectl describe <resource>, e.g. kdsp for kubectl describe pod
-ke<r>       # kubectl edit <resource>, e.g. kep for kubectl edit pods
+kdel<r>       # kubectl delete <resource>, e.g. kgp for kubectl delete pods
+kd<r>      # kubectl describe <resource>, e.g. kdsp for kubectl describe pod
+ke<r>       # kubectl edit <resource>, e.g. kgp for kubectl edit pods
 kg<r>       # kubectl get <resource>, e.g. kgp for kubectl get pods
 kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
 kl          # kubectl logs <podname>
 klf         # kubectl logs -f <podname>: i.e. watch logs live
 ```
+
+However, these aliases can be customize by editing the config file aliases.yaml
 
 There is also some other useful commands such as the following:
 
@@ -45,9 +39,11 @@ kfind      # use a regular expression to find items across everything except
            # custom resources
 kgpns      # Get just pod names in a namespace
 kpfind     # Search through pods with regular expressions
+kdfind     # Search through deployments with regular expressions
 krd        # restart a deployment
 kstatus    # search across namespaces to find pods statuses
 ```
+There is more, but can be found in `bin/`.
 
 For a more detailed list of aliases, view the [docs](https://github.com/Dbz/kube-aliases/blob/master/docs/usage).
 
@@ -97,22 +93,3 @@ namespace switching. You can use the following aliases:
 alias kctx='kubectx'
 alias kns='kubens'
 ```
-#### Kubernetes Metrics Server
-
-To get some metrics from nodes or pods, you can use [Kubernetes Metrics
-Server](https://github.com/kubernetes-incubator/metrics-server). There are 
-the aliases
-
-```bash
-alias kt='kubectl top'
-alias ktn='kubectl top nodes'
-alias ktp='kubectl top pods'
-```
-
-### Trouble Shooting
-
-#### Autocomplete
-
-If there is problems with autocomplete, it may be that kubectl is not on the
-path when the plugin is loaded. To fix, load plugins after adding kubectl to
-path.
