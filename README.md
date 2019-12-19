@@ -1,10 +1,8 @@
 # kube-aliases
 
 This is an oh-my-zsh plugin (or source `kube-aliases.plugin.zsh` for bash) to
-make working with kubernetes easier. It provides a bunch of bash aliases and
-zsh functions. Docs can be found
-[here](https://github.com/Dbz/kube-aliases/blob/master/docs/usage), which
-clarifies all aliases.
+make working with Kubernetes easier. It provides a bunch of bash aliases and
+Zsh functions. 
 
 ## Usage
 
@@ -21,11 +19,10 @@ kd<r>      # kubectl describe <resource>, e.g. kdsp for kubectl describe pod
 ke<r>       # kubectl edit <resource>, e.g. kgp for kubectl edit pods
 kg<r>       # kubectl get <resource>, e.g. kgp for kubectl get pods
 kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
-kl          # kubectl logs <podname>
-klf         # kubectl logs -f <podname>: i.e. watch logs live
 ```
 
-However, these aliases can be customize by editing the config file aliases.yaml
+However, these aliases can be customize by editing the config file
+aliases.yaml. See customizing.
 
 There is also some other useful commands such as the following:
 
@@ -33,19 +30,19 @@ There is also some other useful commands such as the following:
 kcon       # create configuration files
 kdap       # delete all pods within a namespace
 kdrain     # drain a node
-kexec      # execute a command in a specified pod,
+keit       # execute a command in a specified pod,
            # default drops user into a shell
 kfind      # use a regular expression to find items across everything except
            # custom resources
 kgpns      # Get just pod names in a namespace
+kl         # kubectl logs <podname>
+klf        # kubectl logs -f <podname>: i.e. watch logs live
 kpfind     # Search through pods with regular expressions
 kdfind     # Search through deployments with regular expressions
 krd        # restart a deployment
 kstatus    # search across namespaces to find pods statuses
 ```
-There is more, but can be found in `bin/`.
-
-For a more detailed list of aliases, view the [docs](https://github.com/Dbz/kube-aliases/blob/master/docs/usage).
+There is more, but can be found in `bin/` or by running `khelp -f`.
 
 Not everything is currently implemented, but more and more is being added to
 the list. If something is missing that is desired, feel free to submit a pull
@@ -89,3 +86,10 @@ namespace switching. You can use the following aliases:
 alias kctx='kubectx'
 alias kns='kubens'
 ```
+
+# Customizing Aliases
+
+Edit the file `aliases.yaml` and then run `mk_kube_aliases` to generate a new list.
+
+`mk_kube_aliases` is written in go and can be built inside of the directory
+`generate_aliases` with `make build`.
