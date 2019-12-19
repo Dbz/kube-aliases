@@ -4,7 +4,7 @@ GOCMD=go
 SRC=$(wildcard src/*.go)
 
 build:
-	$(GOCMD) build -o $(BINARY) $(SRC)
+	CGO_ENABLED=0 $(GOCMD) build --installsuffix 'static' -o $(BINARY) $(SRC)
 
 # .PHONY: test
 # test:
