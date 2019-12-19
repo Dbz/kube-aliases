@@ -1,16 +1,29 @@
 #!/bin/bash
 
-# Display help
+function usage {
+  printf "Usage: $0: khelp [af]\n"
+  printf "\ta\tdisplay generated aliases\n"
+  printf "\tf\tdisplay functions/scripts\n"
+  printf "\th\tdisplay khelp help\n"
+}
 
-case $1 in
-  commands|cmd|usage)
-    cat $KALIAS/docs/usage
-  ;;
-  resources|res)
-    cat $KALIAS/docs/resources
-    kubectl get customresourcedefinition | awk 'NR>1 {print $1}'
-  ;;
-  *)
-    echo "usage: khelp (cmd|res)"
-  ;;
-esac
+while getopts "afh" o; do
+  case "${o}" in
+    a)
+      cat ${KALIAS}/aliases
+      exit 0
+      ;;
+    f)
+      ls ${KALIAS}/bin
+      exit 0
+      ;;
+    h)
+      usage;
+      exit 0
+      ;;
+    \?)
+      usage
+      exit 1
+      ;;
+  esac
+done
