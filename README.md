@@ -22,7 +22,7 @@ kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kub
 ```
 
 However, these aliases can be customize by editing the config file
-aliases.yaml. See customizing.
+aliases.yaml. See Customizing Aliases.
 
 There is also some other useful commands such as the following:
 
@@ -47,6 +47,13 @@ There is more, but can be found in `bin/` or by running `khelp -f`.
 Not everything is currently implemented, but more and more is being added to
 the list. If something is missing that is desired, feel free to submit a pull
 request.
+
+# Customizing Aliases
+
+Edit the file `aliases.yaml` and then run `mk_kube_aliases` to generate a new list.
+
+`mk_kube_aliases` is written in go and can be built inside of the directory
+`generate_aliases` with `make build`.
 
 
 ## Installation
@@ -87,9 +94,3 @@ alias kctx='kubectx'
 alias kns='kubens'
 ```
 
-# Customizing Aliases
-
-Edit the file `aliases.yaml` and then run `mk_kube_aliases` to generate a new list.
-
-`mk_kube_aliases` is written in go and can be built inside of the directory
-`generate_aliases` with `make build`.
