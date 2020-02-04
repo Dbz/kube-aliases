@@ -95,5 +95,11 @@ cmds:
     cmd: edit
     short: e
 
+pre-cmds:
+  get:
+    cmd: watch
+    short: w
+
 # TODO: Need to add other cmds
 # From File
+
