@@ -39,6 +39,7 @@ type Resources map[string]Resource
 type Aliases struct {
 	Resources Resources `yaml:"resources"`
 	CMDs      CMDs      `yaml:"cmds"`
+	PreCMDs   CMDs      `yaml:"pre-cmds"`
 }
 
 func init() {
@@ -77,6 +78,8 @@ func main() {
 	defer file.Close()
 
 	for r := range aliases.Resources {
+
+		// Generate main commands
 		for c := range aliases.CMDs {
 			s := fmt.Sprintf("alias k%v%v='kubectl %v %v'\n",
 				aliases.CMDs[c].Short, aliases.Resources[r].Short,
@@ -86,6 +89,29 @@ func main() {
 				log.Printf("Warning: could not write alias: %v\n", s)
 			}
 		}
+
+		// Generate pre-cmds, e.g. watch kubectl get pods -> wkgp
+		for c := range aliases.PreCMDs {
+			var cmd CMD
+			if v, ok := aliases.CMDs[c]; ok {
+				cmd = v
+			} else {
+				log.Printf("%s is not a command\n", c)
+			}
+			s := fmt.Sprintf("alias %vk%v%v='%v kubectl %v %v'\n",
+				aliases.PreCMDs[c].Short,
+				cmd.Short,
+				aliases.Resources[r].Short,
+				aliases.PreCMDs[c].CMD,
+				cmd.CMD,
+				r)
+			_, err = io.WriteString(file, s)
+			if err != nil {
+				log.Printf("Warning: could not write alias: %v\n", s)
+			}
+		}
+
+		// Generate any additional commands for a resource
 		for _, v := range aliases.Resources[r].AdditonalCMDs {
 			s := fmt.Sprintf("alias k%v='kubectl %v '\n",
 				v.Short,
