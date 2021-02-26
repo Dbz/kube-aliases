@@ -77,6 +77,10 @@ Add `antigen bundle dbz/kube-aliases` to your antigen bundles in your `.zshrc`
 
 Add `zgen load dbz/kube-aliases` to your zgen plugins in your `.zshrc`
 
+### Zinit
+
+Add `zinit load Dbz/kube-aliases` to your zinit plugins in your `.zshrc`
+
 ### Bash
 
 Source `kube-aliases.plugin.zsh` in your `.bashrc`.
