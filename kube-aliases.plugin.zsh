@@ -204,13 +204,13 @@ alias kgsy='kubectl get services -o yaml'
 alias kgss='kubectl get statefulsets'
 
 # Execute a command in a specified pod, default drops user into the shell
-alias keit='kubectl exec -it'
+alias keit='kubectl exec -it --'
 
 kcexec () {
-  kubectl exec -it $1 ${2:-bash}
+  kubectl exec -it $1 -- ${2:-bash}
 }
 kexec () {
-  kubectl exec -it $1 ${2:-bash}
+  kubectl exec -it $1 -- ${2:-bash}
 }
 
 # Set and use a new context
