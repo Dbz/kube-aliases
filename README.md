@@ -61,7 +61,7 @@ request.
 ### Oh-My-Zsh
 
 ```
-git clone git@github.com:Dbz/kube-aliases.git ~/.oh-my-zsh/custom/plugins/kube-aliases
+git clone https://github.com/Dbz/kube-aliases.git ~/.oh-my-zsh/custom/plugins/kube-aliases
 echo "plugins+=(kube-aliases)" >> ~/.zshrc
 ```
 
