@@ -24,9 +24,9 @@ In general and when it makes sense, aliases follow the following conventions.
 
 ```bash
 k           # kubectl
-kd<r>       # kubectl delete <resource>, e.g. kgp for kubectl delete pods
+kd<r>       # kubectl delete <resource>, e.g. kdp for kubectl delete pods
 kds<r>      # kubectl describe <resource>, e.g. kdsp for kubectl describe pod
-ke<r>       # kubectl edit <resource>, e.g. kgp for kubectl edit pods
+ke<r>       # kubectl edit <resource>, e.g. kep for kubectl edit pods
 kg<r>       # kubectl get <resource>, e.g. kgp for kubectl get pods
 kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
 kl          # kubectl logs <podname>
