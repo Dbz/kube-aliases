@@ -35,6 +35,9 @@ resources:
     short: np
   nodes:
     short: n
+    add:
+      - cmd: "drain node --delete-local-data --force --ignore-daemonsets"
+        short: drain
   persistentvolume:
     short: pv
   persistentvolumeclaims:
