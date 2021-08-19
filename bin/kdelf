@@ -4,5 +4,5 @@
 
 for arg in "$@"
 do
-  kubectl delete -f "$arg"
+  kubectl describe -f "$arg"
 done
