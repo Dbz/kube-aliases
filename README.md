@@ -93,7 +93,8 @@ alias kns='kubens'
 
 # Customizing Aliases
 
-Edit the file `aliases.yaml` and then run `mk_kube_aliases` to generate a new list.
+The `aliases.yaml` is used to generate aliases. It can be modified and aliases
+updated with `generate-kube-aliases aliases.yaml aliases` in the root directory of this project. 
 
-`mk_kube_aliases` is written in go and can be built inside of the directory
-`generate_aliases` with `make build`.
+`generate-kube-aliases` is written in go and can be built inside of the directory
+`generate_aliases` with `make`.
