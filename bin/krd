@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Start a restart on pods, will follow the rolling release policy
-
-kubectl patch deployment ${1} -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
