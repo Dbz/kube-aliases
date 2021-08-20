@@ -79,6 +79,9 @@ resources:
     short: ss
 
 cmds:
+  create:
+    cmd: create
+    short: c
   delete:
     cmd: delete
     short: del
