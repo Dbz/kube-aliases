@@ -33,3 +33,7 @@ alias krd="kubectl rollout restart deployment"
 # TODO: This should probably be brought over to the generated aliases. Being
 # able to grab all the names would be useful that can be split on a ' ' would be nice
 alias kgpn="kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'"
+
+# Is this needed? I dont think Ive ever used this. Maybe a restart all pods
+# that can be generated
+alias kdelap="kubectl delete pods $(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}')"

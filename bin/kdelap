@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Delete all pods within a namespace.
-
-read -p "This will attempt to delete all pods within the namespace. Do you want to continue?(y/N) " kdelete
-
-if [[ "${kdelete}" =~ ^[yY]$ ]]; then
-  kubectl delete pods $(kgpns)
-fi
