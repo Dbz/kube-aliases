@@ -25,4 +25,7 @@ alias kns="kubens"
 alias kcf="kubectl create -f"
 alias kaf="kubectl apply -f"
 alias kgf="kubectl get -f"
+alias kef="kubectl edit -f"
 alias kdelf="kubectl delete -f"
+
+alias krd="kubectl rollout restart deployment"
