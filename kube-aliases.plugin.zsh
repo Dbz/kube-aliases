@@ -29,3 +29,7 @@ alias kef="kubectl edit -f"
 alias kdelf="kubectl delete -f"
 
 alias krd="kubectl rollout restart deployment"
+
+# TODO: This should probably be brought over to the generated aliases. Being
+# able to grab all the names would be useful that can be split on a ' ' would be nice
+alias kgpn="kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'"

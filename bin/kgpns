@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Get the pod names (just the names) of all pods in a namespace.
-
-echo $(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{" "}}{{end}}')
