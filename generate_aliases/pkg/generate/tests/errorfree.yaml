@@ -1,0 +1,12 @@
+resources:
+  meowcats:
+    short: mcs
+  meows:
+    short: m
+    add:
+      - cmd: "cuddle me"
+        short: cm
+cmds:
+  create:
+    cmd: create
+    short: c

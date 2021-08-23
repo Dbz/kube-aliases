@@ -1,0 +1,10 @@
+resources:
+  meowcats:
+    short: mc
+  bigcats:
+    short: mc
+
+cmds:
+  create:
+    cmd: create
+    short: c
