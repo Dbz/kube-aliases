@@ -12,7 +12,7 @@ resources:
   controllerrevisions:
     short: crv
   cronjobs:
-    short: crv
+    short: cj
   daemonsets:
     short: ds
   deployments:
