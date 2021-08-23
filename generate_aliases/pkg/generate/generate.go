@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -41,19 +40,19 @@ type Aliases struct {
 func Generate(filePath, targetPath string) error {
 	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		log.Fatalf("error reading file %s with error %s",
+		return fmt.Errorf("error reading file %s with error %s",
 			filePath, err)
 	}
 
 	var aliases Aliases
 	err = yaml.Unmarshal(file, &aliases)
 	if err != nil {
-		log.Fatalf("error unmarshaling file: %v", err)
+		return fmt.Errorf("error unmarshaling file: %v", err)
 	}
 
 	aliasFile, err := os.Create(targetPath)
 	if err != nil {
-		log.Fatalf("Failed to create alias file: %v", err)
+		return fmt.Errorf("Failed to create alias file: %v", err)
 	}
 	defer aliasFile.Close()
 
@@ -77,7 +76,7 @@ func Generate(filePath, targetPath string) error {
 
 			_, err = io.WriteString(aliasFile, s)
 			if err != nil {
-				log.Printf("Warning: could not write alias: %v\n", s)
+				return fmt.Errorf("Warning: could not write alias: %v\n", s)
 			}
 		}
 
@@ -96,7 +95,7 @@ func Generate(filePath, targetPath string) error {
 				aliasCommand)
 			_, err = io.WriteString(aliasFile, s)
 			if err != nil {
-				log.Printf("Warning: could not write alias: %v\n", s)
+				return fmt.Errorf("Warning: could not write alias: %v\n", s)
 			}
 		}
 

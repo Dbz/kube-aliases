@@ -15,7 +15,10 @@ var rootCmd = &cobra.Command{
 	Example: "generate-kube-aliases alias.yaml aliases.zsh",
 	Args:    cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		generate.Generate(args[0], args[1])
+		err := generate.Generate(args[0], args[1])
+		if err != nil {
+			panic(err)
+		}
 	},
 }
 

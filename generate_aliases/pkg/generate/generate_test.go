@@ -34,5 +34,4 @@ func Test_Generate(t *testing.T) {
 			require.EqualError(t, err, tc.err)
 		}
 	}
-	// Generate(aliasYAML, testAliasOutput)
 }
