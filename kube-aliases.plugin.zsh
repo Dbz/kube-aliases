@@ -36,4 +36,4 @@ alias kgpn="kubectl get pods -o go-template --template '{{range .items}}{{.metad
 
 # Is this needed? I dont think Ive ever used this. Maybe a restart all pods
 # that can be generated
-alias kdelap="kubectl delete pods $(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}')"
+# alias kdelap="kubectl delete pods $(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{" "}}{{end}}')
