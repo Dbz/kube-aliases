@@ -38,7 +38,7 @@ type Aliases struct {
 	CMDs      CMDs      `yaml:"cmds"`
 }
 
-func Generate(filePath, targetPath string) {
+func Generate(filePath, targetPath string) error {
 	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		log.Fatalf("error reading file %s with error %s",
@@ -57,14 +57,23 @@ func Generate(filePath, targetPath string) {
 	}
 	defer aliasFile.Close()
 
+	aliasNames := map[string]string{}
+
 	for r := range aliases.Resources {
 
 		// Generate Commands
 		for c := range aliases.CMDs {
 
-			s := fmt.Sprintf("alias k%v%v='kubectl %v %v'\n",
-				aliases.CMDs[c].Short, aliases.Resources[r].Short,
-				aliases.CMDs[c].CMD, r)
+			aliasName := "k" + aliases.CMDs[c].Short + aliases.Resources[r].Short
+			aliasCommand := "kubectl " + aliases.CMDs[c].CMD + " " + r
+			if _, ok := aliasNames[aliasName]; ok {
+				return fmt.Errorf("Duplicate aliases exist. %v can mean:\n1. %v\n2. %v\n",
+					aliasName, aliasNames[aliasName], aliasCommand)
+			}
+			aliasNames[aliasName] = aliasCommand
+
+			s := fmt.Sprintf("alias %v='%v'\n",
+				aliasName, aliasCommand)
 
 			_, err = io.WriteString(aliasFile, s)
 			if err != nil {
@@ -73,9 +82,18 @@ func Generate(filePath, targetPath string) {
 		}
 
 		for _, v := range aliases.Resources[r].AdditonalCMDs {
-			s := fmt.Sprintf("alias k%v='kubectl %v '\n",
-				v.Short,
-				v.CMD)
+
+			aliasName := "k" + v.Short
+			aliasCommand := "kubectl " + v.CMD
+			if _, ok := aliasNames[aliasName]; ok {
+				return fmt.Errorf("Duplicate aliases exist. %v can mean:\n1. %v\n2. %v\n",
+					aliasName, aliasNames[aliasName], aliasCommand)
+			}
+			aliasNames[aliasName] = aliasCommand
+
+			s := fmt.Sprintf("alias %v='%v'\n",
+				aliasName,
+				aliasCommand)
 			_, err = io.WriteString(aliasFile, s)
 			if err != nil {
 				log.Printf("Warning: could not write alias: %v\n", s)
@@ -83,5 +101,6 @@ func Generate(filePath, targetPath string) {
 		}
 
 	}
+	return nil
 
 }
