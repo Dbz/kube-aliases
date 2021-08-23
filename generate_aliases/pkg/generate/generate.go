@@ -8,35 +8,9 @@ import (
 	"os"
 
 	"gopkg.in/yaml.v3"
+
+	"github.com/Dbz/kube-aliases/pkg/types"
 )
-
-// CMD contains a Kubernetes Command and its short aliases
-type CMD struct {
-	CMD   string `yaml:"cmd"`
-	Short string `yaml:"short"`
-	// TODO: Added suffix and prefix commands
-	// Prefix string `yaml:"prefix,omitempty"`
-	// Suffix string `yaml:"suffix,omitempty"`
-}
-
-type CMDs map[string]CMD
-
-// Resources in Kubernetes and specifies its short form
-type Resource struct {
-	Short string `yaml:"short"`
-	// Additional commands that do not need to be generated for all resources
-	AdditonalCMDs []CMD `yaml:"add"`
-}
-
-// Resources is a collection of resources
-type Resources map[string]Resource
-
-// Aliases is the collection of Resources and CMDs, and should contain
-// is used to read in the given yaml file
-type Aliases struct {
-	Resources Resources `yaml:"resources"`
-	CMDs      CMDs      `yaml:"cmds"`
-}
 
 func Generate(filePath, targetPath string) {
 	file, err := ioutil.ReadFile(filePath)
@@ -45,7 +19,7 @@ func Generate(filePath, targetPath string) {
 			filePath, err)
 	}
 
-	var aliases Aliases
+	var aliases types.Aliases
 	err = yaml.Unmarshal(file, &aliases)
 	if err != nil {
 		log.Fatalf("error unmarshaling file: %v", err)
@@ -62,9 +36,16 @@ func Generate(filePath, targetPath string) {
 		// Generate Commands
 		for c := range aliases.CMDs {
 
-			s := fmt.Sprintf("alias k%v%v='kubectl %v %v'\n",
-				aliases.CMDs[c].Short, aliases.Resources[r].Short,
-				aliases.CMDs[c].CMD, r)
+			s := generateAlias(&types.AliasCMD{
+				PrefixShort:   aliases.CMDs[c].Prefix.Short,
+				ResourceShort: aliases.Resources[r].Short,
+				Short:         aliases.CMDs[c].Short,
+				SuffixShort:   aliases.CMDs[c].Suffix.Short,
+				Prefix:        aliases.CMDs[c].Prefix.CMD,
+				CMD:           aliases.CMDs[c].CMD,
+				Resource:      r,
+				Suffix:        aliases.CMDs[c].Suffix.CMD,
+			})
 
 			_, err = io.WriteString(aliasFile, s)
 			if err != nil {
@@ -73,9 +54,10 @@ func Generate(filePath, targetPath string) {
 		}
 
 		for _, v := range aliases.Resources[r].AdditonalCMDs {
-			s := fmt.Sprintf("alias k%v='kubectl %v '\n",
-				v.Short,
-				v.CMD)
+			s := generateAlias(&types.AliasCMD{
+				Short: v.Short,
+				CMD:   v.CMD,
+			})
 			_, err = io.WriteString(aliasFile, s)
 			if err != nil {
 				log.Printf("Warning: could not write alias: %v\n", s)
@@ -83,5 +65,20 @@ func Generate(filePath, targetPath string) {
 		}
 
 	}
+
+}
+
+func generateAlias(alias *types.AliasCMD) string {
+
+	if alias.Prefix != "" {
+		alias.Prefix = alias.Prefix + " "
+	}
+	if alias.Suffix != "" {
+		alias.Suffix = " " + alias.Suffix
+	}
+
+	return fmt.Sprintf("alias %vk%v%v%v='%vkubectl %v %v%v'\n",
+		alias.PrefixShort, alias.Short, alias.ResourceShort, alias.SuffixShort,
+		alias.Prefix, alias.CMD, alias.Resource, alias.Suffix)
 
 }

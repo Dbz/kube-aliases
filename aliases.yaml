@@ -94,6 +94,13 @@ cmds:
   get-all:
     cmd: "get --all-namespaces -o wide"
     short: ga
+  get-watch:
+    cmd: get
+    short: g
+    prefix:
+      cmd: watch
+      short: w
+
   get-yaml:
     cmd: "get -o yaml"
     short: gy
