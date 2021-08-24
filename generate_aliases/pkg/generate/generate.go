@@ -103,7 +103,7 @@ func GenerateAlias(w io.Writer, aliasNames map[string]string, alias *types.Alias
 		alias.Prefix = strings.Trim(alias.Prefix, " ") + " "
 	}
 	if alias.Suffix != "" {
-		alias.Suffix = " " + alias.Suffix
+		alias.Suffix = " " + strings.Trim(alias.Suffix, " ")
 	}
 
 	aliasName := fmt.Sprintf("%vk%v%v%v",
