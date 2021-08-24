@@ -3,18 +3,25 @@ package generate
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/Dbz/kube-aliases/pkg/types"
 	"github.com/stretchr/testify/require"
 )
 
+var (
+	wd string
+)
+
+func TestMain(t *testing.M) {
+	wd, _ := os.Getwd()
+	wd = filepath.Dir(wd) + "/generate/tests/"
+}
+
 // TestGenerateDuplicates checks if Generate catches duplicates
 // TODO: Fix
 func TestGenerateDuplicates(t *testing.T) {
-
-	wd, _ := os.Getwd()
-	wd = filepath.Dir(wd)
 
 	tt := []struct {
 		aliasYAML  string
@@ -22,12 +29,12 @@ func TestGenerateDuplicates(t *testing.T) {
 		err        string
 	}{
 		{
-			aliasYAML:  wd + "/generate/tests/aliases-duplicate.yaml",
+			aliasYAML:  wd + "aliases-duplicate.yaml",
 			outputFile: "/tmp/aliases-duplicate",
 			err:        "Duplicate aliases exist. kcmc can mean:\n1. kubectl create meowcats\n2. kubectl create bigcats\n",
 		},
 		{
-			aliasYAML:  wd + "/generate/tests/errorfree.yaml",
+			aliasYAML:  wd + "errorfree.yaml",
 			outputFile: "/tmp/errorfree",
 			err:        "",
 		},
@@ -49,7 +56,9 @@ func TestGenerateDuplicates(t *testing.T) {
 func TestGenerateAlias(t *testing.T) {
 	tcs := []struct {
 		Input    *types.AliasCMD
+		Existing map[string]string
 		Expected string
+		Err      error
 	}{
 		// Testing with prefix
 		{
@@ -63,7 +72,9 @@ func TestGenerateAlias(t *testing.T) {
 				Resource:      "pods",
 				Suffix:        "",
 			},
+			Existing: map[string]string{},
 			Expected: "alias wkgp='watch kubectl get pods'\n",
+			Err:      nil,
 		},
 		// Testing with suffix
 		{
@@ -77,7 +88,9 @@ func TestGenerateAlias(t *testing.T) {
 				Resource:      "pods",
 				Suffix:        "zed",
 			},
+			Existing: map[string]string{},
 			Expected: "alias kgpz='kubectl get pods zed'\n",
+			Err:      nil,
 		},
 		// Testing without prefix or suffix
 		{
@@ -91,13 +104,17 @@ func TestGenerateAlias(t *testing.T) {
 				Resource:      "pods",
 				Suffix:        "",
 			},
+			Existing: map[string]string{},
 			Expected: "alias kgp='kubectl get pods'\n",
 		},
+		// TODO: expecting errors
 	}
 
 	for _, c := range tcs {
-		recieved, err := generateAlias(c.Input)
-		if err != nil {
+		var b strings.Builder
+		err := GenerateAlias(&b, c.Existing, c.Input)
+		recieved := b.String()
+		if err != nil && c.Err == nil {
 			t.Errorf("Received err generating aliases: {%v}", err)
 		}
 		if recieved != c.Expected {

@@ -5,13 +5,12 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 
 	"github.com/Dbz/kube-aliases/pkg/types"
 )
-
-var aliasNames map[string]string
 
 func Generate(filePath, targetPath string) error {
 	file, err := ioutil.ReadFile(filePath)
@@ -32,64 +31,64 @@ func Generate(filePath, targetPath string) error {
 	}
 	defer aliasFile.Close()
 
-	aliasNames = map[string]string{}
+	var aliasBuilder strings.Builder
+	aliasNames := map[string]string{}
 	for r := range aliases.Resources {
 
 		// Generate Commands
 		for c := range aliases.CMDs {
 
-			s, err := generateAlias(&types.AliasCMD{
-				PrefixShort:   aliases.CMDs[c].Prefix.Short,
-				ResourceShort: aliases.Resources[r].Short,
-				Short:         aliases.CMDs[c].Short,
-				SuffixShort:   aliases.CMDs[c].Suffix.Short,
-				Prefix:        aliases.CMDs[c].Prefix.CMD,
-				CMD:           aliases.CMDs[c].CMD,
-				Resource:      r,
-				Suffix:        aliases.CMDs[c].Suffix.CMD,
-			})
+			err := GenerateAlias(&aliasBuilder,
+				aliasNames,
+				&types.AliasCMD{
+					PrefixShort:   aliases.CMDs[c].Prefix.Short,
+					ResourceShort: aliases.Resources[r].Short,
+					Short:         aliases.CMDs[c].Short,
+					SuffixShort:   aliases.CMDs[c].Suffix.Short,
+					Prefix:        aliases.CMDs[c].Prefix.CMD,
+					CMD:           aliases.CMDs[c].CMD,
+					Resource:      r,
+					Suffix:        aliases.CMDs[c].Suffix.CMD,
+				})
 			if err != nil {
 				return err
 			}
 
-			_, err = io.WriteString(aliasFile, s)
-			if err != nil {
-				return fmt.Errorf("Warning: could not write alias: %v\n", s)
-			}
 		}
 
 		for _, v := range aliases.Resources[r].AdditonalCMDs {
-			// s, err := generateAlias(&types.AliasCMD{
-			// 	Short: v.Short,
-			// 	CMD:   v.CMD,
-			// })
 
-			s, err := generateAlias(&types.AliasCMD{
-				PrefixShort:   v.Prefix.Short,
-				ResourceShort: aliases.Resources[r].Short,
-				Short:         v.Short,
-				SuffixShort:   v.Suffix.Short,
-				Prefix:        v.Prefix.CMD,
-				CMD:           v.CMD,
-				Resource:      r,
-				Suffix:        v.Suffix.CMD,
-			})
+			err := GenerateAlias(&aliasBuilder,
+				aliasNames,
+				&types.AliasCMD{
+					PrefixShort:   v.Prefix.Short,
+					ResourceShort: aliases.Resources[r].Short,
+					Short:         v.Short,
+					SuffixShort:   v.Suffix.Short,
+					Prefix:        v.Prefix.CMD,
+					CMD:           v.CMD,
+					Resource:      r,
+					Suffix:        v.Suffix.CMD,
+				})
 
 			if err != nil {
 				return err
-			}
-			_, err = io.WriteString(aliasFile, s)
-			if err != nil {
-				return fmt.Errorf("Warning: could not write alias: %v\n", s)
 			}
 		}
 
 	}
+
+	_, err = io.WriteString(aliasFile, aliasBuilder.String())
+	if err != nil {
+		return fmt.Errorf("Warning: could not write alias: %v\n", err)
+	}
+
 	return nil
 
 }
 
-func generateAlias(alias *types.AliasCMD) (string, error) {
+// GenerateAlias -- TODO document
+func GenerateAlias(w io.Writer, aliasNames map[string]string, alias *types.AliasCMD) error {
 
 	if alias.Prefix != "" {
 		alias.Prefix = alias.Prefix + " "
@@ -109,15 +108,15 @@ func generateAlias(alias *types.AliasCMD) (string, error) {
 		alias.Resource,
 		alias.Suffix)
 
-	s := fmt.Sprintf("alias %v='%v'\n", aliasName, aliasCommand)
+	fmt.Fprintf(w, "alias %v='%v'\n", aliasName, aliasCommand)
 
 	if v, ok := aliasNames[aliasName]; ok {
 		err := fmt.Errorf("Duplicate aliases exist. %v can mean:\n1. %v\n2. %v\n",
 			aliasName, v, aliasCommand)
-		return s, err
+		return err
 	}
 	aliasNames[aliasName] = aliasCommand
 
-	return s, nil
+	return nil
 
 }
