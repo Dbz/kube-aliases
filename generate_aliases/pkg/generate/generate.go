@@ -59,10 +59,22 @@ func Generate(filePath, targetPath string) error {
 		}
 
 		for _, v := range aliases.Resources[r].AdditonalCMDs {
+			// s, err := generateAlias(&types.AliasCMD{
+			// 	Short: v.Short,
+			// 	CMD:   v.CMD,
+			// })
+
 			s, err := generateAlias(&types.AliasCMD{
-				Short: v.Short,
-				CMD:   v.CMD,
+				PrefixShort:   v.Prefix.Short,
+				ResourceShort: aliases.Resources[r].Short,
+				Short:         v.Short,
+				SuffixShort:   v.Suffix.Short,
+				Prefix:        v.Prefix.CMD,
+				CMD:           v.CMD,
+				Resource:      r,
+				Suffix:        v.Suffix.CMD,
 			})
+
 			if err != nil {
 				return err
 			}
