@@ -78,6 +78,15 @@ func Generate(filePath, targetPath string) error {
 
 	}
 
+	// take care of any additional aliases
+	for _, v := range aliases.Additional {
+		err := GenerateAdditional(&aliasBuilder,
+			aliasNames, &v)
+		if err != nil {
+			return err
+		}
+	}
+
 	_, err = io.WriteString(aliasFile, aliasBuilder.String())
 	if err != nil {
 		return fmt.Errorf("Warning: could not write alias: %v\n", err)
@@ -108,7 +117,7 @@ func GenerateAlias(w io.Writer, aliasNames map[string]string, alias *types.Alias
 		alias.Resource,
 		alias.Suffix)
 
-	fmt.Fprintf(w, "alias %v='%v'\n", aliasName, aliasCommand)
+	fmt.Fprintf(w, "alias %v=\"%v\"\n", aliasName, aliasCommand)
 
 	if v, ok := aliasNames[aliasName]; ok {
 		err := fmt.Errorf("Duplicate aliases exist. %v can mean:\n1. %v\n2. %v\n",
@@ -119,4 +128,19 @@ func GenerateAlias(w io.Writer, aliasNames map[string]string, alias *types.Alias
 
 	return nil
 
+}
+
+// GenerateAdditional
+func GenerateAdditional(w io.Writer,
+	aliasNames map[string]string, alias *types.CMD) error {
+
+	if v, ok := aliasNames[alias.Short]; ok {
+		err := fmt.Errorf("Duplicate aliases exist. %v can mean:\n1. %v\n2. %v\n",
+			alias.Short, v, alias.CMD)
+		return err
+	}
+
+	fmt.Fprintf(w, "alias %v=\"%v\"\n", alias.Short, alias.CMD)
+
+	return nil
 }

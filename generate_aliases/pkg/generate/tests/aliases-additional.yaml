@@ -1,0 +1,3 @@
+additional:
+  - short: et
+    cmd: "echo 'this is a test'"

@@ -122,3 +122,37 @@ func TestGenerateAlias(t *testing.T) {
 		}
 	}
 }
+
+func TestGenterateAdditional(t *testing.T) {
+	tcs := []struct {
+		Input    *types.CMD
+		Existing map[string]string
+		Expected string
+		Err      error
+	}{
+		// Testing with prefix
+		{
+			Input: &types.CMD{
+				Short: "et",
+				CMD:   "echo 'hello world'",
+			},
+			Existing: map[string]string{},
+			Expected: "alias et=\"echo 'hello world'\"\n",
+			Err:      nil,
+		},
+		// TODO: expecting errors
+	}
+
+	for _, c := range tcs {
+		var b strings.Builder
+		err := GenerateAdditional(&b, c.Existing, c.Input)
+		recieved := b.String()
+		if err != nil && c.Err == nil {
+			t.Errorf("Received err generating aliases: {%v}", err)
+		}
+		if recieved != c.Expected {
+			t.Errorf("{%v} expected, received: {%v}\n", c.Expected, recieved)
+		}
+	}
+
+}

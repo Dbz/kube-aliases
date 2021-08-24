@@ -94,6 +94,13 @@ cmds:
   get-all:
     cmd: "get --all-namespaces -o wide"
     short: ga
+  get-name:
+    cmd: get
+    short: g
+    suffix:
+      # gross
+      cmd: "-o go-template --template \'{{range .items}}{{.metadata.name}}{{\\\" \\\"}}{{end}}\'"
+      short: n
   get-watch:
     cmd: get
     short: g
@@ -108,5 +115,22 @@ cmds:
     cmd: edit
     short: e
 
-# TODO: Need to add other cmds
-# From File
+additional:
+  - short: k
+    cmd: "kubectl"
+  - short: kctx
+    cmd: "kubectx"
+  - short: kns
+    cmd: "kubens"
+  - short: kcf
+    cmd: "kubectl create -f"
+  - short: kaf
+    cmd: "kubectl apply -f"
+  - short: kgf
+    cmd: "kubectl get -f"
+  - short: kef
+    cmd: "kubectl edit -f"
+  - short: kdelf
+    cmd: "kubectl delete -f"
+  - short: krd
+    cmd: "kubectl rollout restart deployment"
