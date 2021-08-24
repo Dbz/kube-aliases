@@ -100,7 +100,7 @@ func Generate(filePath, targetPath string) error {
 func GenerateAlias(w io.Writer, aliasNames map[string]string, alias *types.AliasCMD) error {
 
 	if alias.Prefix != "" {
-		alias.Prefix = alias.Prefix + " "
+		alias.Prefix = strings.Trim(alias.Prefix, " ") + " "
 	}
 	if alias.Suffix != "" {
 		alias.Suffix = " " + alias.Suffix
