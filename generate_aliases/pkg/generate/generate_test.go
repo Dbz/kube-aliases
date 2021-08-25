@@ -55,97 +55,77 @@ func TestGenerateDuplicates(t *testing.T) {
 // TestGenerateAlias checks if aliases are generated correctly
 func TestGenerateAlias(t *testing.T) {
 	tcs := []struct {
-		Input    *types.AliasCMD
-		Existing map[string]string
+		Input    *types.AliasCMDs
 		Expected string
 		Err      error
 	}{
 		// Testing with prefix
 		{
-			Input: &types.AliasCMD{
-				PrefixShort:   "w",
-				ResourceShort: "p",
-				Short:         "g",
-				SuffixShort:   "",
-				Prefix:        "watch",
-				CMD:           "get",
-				Resource:      "pods",
-				Suffix:        "",
+			Input: &types.AliasCMDs{
+				Aliases: []types.AliasCMD{{
+					PrefixShort:   "w",
+					ResourceShort: "p",
+					Short:         "g",
+					SuffixShort:   "",
+					Prefix:        "watch",
+					CMD:           "get",
+					Resource:      "pods",
+					Suffix:        "",
+				}},
 			},
-			Existing: map[string]string{},
 			Expected: "alias wkgp='watch kubectl get pods'\n",
 			Err:      nil,
 		},
 		// Testing with suffix
 		{
-			Input: &types.AliasCMD{
-				PrefixShort:   "",
-				ResourceShort: "p",
-				Short:         "g",
-				SuffixShort:   "z",
-				Prefix:        "",
-				CMD:           "get",
-				Resource:      "pods",
-				Suffix:        "zed",
+			Input: &types.AliasCMDs{
+				Aliases: []types.AliasCMD{{
+					PrefixShort:   "",
+					ResourceShort: "p",
+					Short:         "g",
+					SuffixShort:   "z",
+					Prefix:        "",
+					CMD:           "get",
+					Resource:      "pods",
+					Suffix:        "zed",
+				}},
 			},
-			Existing: map[string]string{},
 			Expected: "alias kgpz='kubectl get pods zed'\n",
 			Err:      nil,
 		},
 		// Testing without prefix or suffix
 		{
-			Input: &types.AliasCMD{
-				PrefixShort:   "",
-				ResourceShort: "p",
-				Short:         "g",
-				SuffixShort:   "",
-				Prefix:        "",
-				CMD:           "get",
-				Resource:      "pods",
-				Suffix:        "",
+			Input: &types.AliasCMDs{
+				Aliases: []types.AliasCMD{{
+					PrefixShort:   "",
+					ResourceShort: "p",
+					Short:         "g",
+					SuffixShort:   "",
+					Prefix:        "",
+					CMD:           "get",
+					Resource:      "pods",
+					Suffix:        "",
+				}},
 			},
-			Existing: map[string]string{},
 			Expected: "alias kgp='kubectl get pods'\n",
 		},
-		// TODO: expecting errors
-	}
-
-	for _, c := range tcs {
-		var b strings.Builder
-		err := GenerateAlias(&b, c.Existing, c.Input)
-		recieved := b.String()
-		if err != nil && c.Err == nil {
-			t.Errorf("Received err generating aliases: {%v}", err)
-		}
-		if recieved != c.Expected {
-			t.Errorf("{%v} expected, received: {%v}\n", c.Expected, recieved)
-		}
-	}
-}
-
-func TestGenterateAdditional(t *testing.T) {
-	tcs := []struct {
-		Input    *types.CMD
-		Existing map[string]string
-		Expected string
-		Err      error
-	}{
-		// Testing with prefix
+		// Testing short command
 		{
-			Input: &types.CMD{
-				Short: "et",
-				CMD:   "echo 'hello world'",
+			Input: &types.AliasCMDs{
+				CMDs: []types.CMD{{
+					Short: "et",
+					CMD:   "echo 'hello world'",
+				}},
 			},
-			Existing: map[string]string{},
 			Expected: "alias et=\"echo 'hello world'\"\n",
-			Err:      nil,
 		},
-		// TODO: expecting errors
+		// TODO: expecting errors for AliasCMDs.Aliases
+		// TODO: expecting errors for AliasCMDs.CMDs
 	}
 
 	for _, c := range tcs {
 		var b strings.Builder
-		err := GenerateAdditional(&b, c.Existing, c.Input)
+		err := GenerateAlias(&b, c.Input)
 		recieved := b.String()
 		if err != nil && c.Err == nil {
 			t.Errorf("Received err generating aliases: {%v}", err)
@@ -154,5 +134,4 @@ func TestGenterateAdditional(t *testing.T) {
 			t.Errorf("{%v} expected, received: {%v}\n", c.Expected, recieved)
 		}
 	}
-
 }
