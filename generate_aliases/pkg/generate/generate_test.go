@@ -1,6 +1,7 @@
 package generate
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -14,14 +15,17 @@ var (
 	wd string
 )
 
-func TestMain(t *testing.M) {
-	wd, _ := os.Getwd()
+func TestMain(m *testing.M) {
+	wd, _ = os.Getwd()
 	wd = filepath.Dir(wd) + "/generate/tests/"
+	os.Exit(m.Run())
 }
 
 // TestGenerateDuplicates checks if Generate catches duplicates
 // TODO: Fix
 func TestGenerateDuplicates(t *testing.T) {
+
+	fmt.Println("here" + wd)
 
 	tt := []struct {
 		aliasYAML  string
@@ -73,7 +77,7 @@ func TestGenerateAlias(t *testing.T) {
 					Suffix:        "",
 				}},
 			},
-			Expected: "alias wkgp='watch kubectl get pods'\n",
+			Expected: "alias wkgp=\"watch kubectl get pods\"\n",
 			Err:      nil,
 		},
 		// Testing with suffix
@@ -90,7 +94,7 @@ func TestGenerateAlias(t *testing.T) {
 					Suffix:        "zed",
 				}},
 			},
-			Expected: "alias kgpz='kubectl get pods zed'\n",
+			Expected: "alias kgpz=\"kubectl get pods zed\"\n",
 			Err:      nil,
 		},
 		// Testing without prefix or suffix
@@ -107,7 +111,7 @@ func TestGenerateAlias(t *testing.T) {
 					Suffix:        "",
 				}},
 			},
-			Expected: "alias kgp='kubectl get pods'\n",
+			Expected: "alias kgp=\"kubectl get pods\"\n",
 		},
 		// Testing short command
 		{

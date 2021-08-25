@@ -79,41 +79,32 @@ resources:
     short: ss
 
 cmds:
-  create:
+  - short: c
     cmd: create
-    short: c
-  delete:
+  - short: del
     cmd: delete
-    short: del
-  describe:
+  - short: d
     cmd: describe
-    short: d
-  get:
+  - short: g
     cmd: get
-    short: g
-  get-all:
+  - short: ga
     cmd: "get --all-namespaces -o wide"
-    short: ga
-  get-name:
+  - short: g
     cmd: get
-    short: g
     suffix:
+      short: n
       # gross
       cmd: "-o go-template --template \'{{range .items}}{{.metadata.name}}{{\\\" \\\"}}{{end}}\'"
-      short: n
-  get-watch:
+  - short: g
     cmd: get
-    short: g
     prefix:
-      cmd: watch
       short: w
+      cmd: watch
 
-  get-yaml:
+  - short: gy
     cmd: "get -o yaml"
-    short: gy
-  edit:
+  - short: e
     cmd: edit
-    short: e
 
 additional:
   - short: k
