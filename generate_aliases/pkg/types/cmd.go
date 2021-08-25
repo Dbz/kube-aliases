@@ -35,4 +35,10 @@ type AliasCMD struct {
 	SuffixShort   string
 }
 
+type AliasCMDs struct {
+	Aliases    []AliasCMD
+	CMDs       []CMD
+	AliasNames map[string]string
+}
+
 type CMDs map[string]CMD
