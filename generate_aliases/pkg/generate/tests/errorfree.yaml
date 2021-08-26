@@ -7,6 +7,5 @@ resources:
       - cmd: "cuddle me"
         short: cm
 cmds:
-  create:
-    cmd: create
+  - cmd: create
     short: c

@@ -5,6 +5,5 @@ resources:
     short: mc
 
 cmds:
-  create:
+  - short: c
     cmd: create
-    short: c

@@ -4,6 +4,6 @@ package types
 // is used to read in the given yaml file
 type Aliases struct {
 	Resources  Resources `yaml:"resources"`
-	CMDs       CMDs      `yaml:"cmds"`
+	CMDs       []CMD     `yaml:"cmds"`
 	Additional []CMD     `yaml:"additional"`
 }

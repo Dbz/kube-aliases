@@ -36,31 +36,31 @@ func Generate(filePath, targetPath string) error {
 	for r := range aliases.Resources {
 
 		// Generate Commands
-		for c := range aliases.CMDs {
+		for _, c := range aliases.CMDs {
 
 			aliasCMDs.Aliases = append(aliasCMDs.Aliases, types.AliasCMD{
-				PrefixShort:   aliases.CMDs[c].Prefix.Short,
+				PrefixShort:   c.Prefix.Short,
 				ResourceShort: aliases.Resources[r].Short,
-				Short:         aliases.CMDs[c].Short,
-				SuffixShort:   aliases.CMDs[c].Suffix.Short,
-				Prefix:        aliases.CMDs[c].Prefix.CMD,
-				CMD:           aliases.CMDs[c].CMD,
+				Short:         c.Short,
+				SuffixShort:   c.Suffix.Short,
+				Prefix:        c.Prefix.CMD,
+				CMD:           c.CMD,
 				Resource:      r,
-				Suffix:        aliases.CMDs[c].Suffix.CMD,
+				Suffix:        c.Suffix.CMD,
 			})
 		}
 
-		for _, v := range aliases.Resources[r].AdditonalCMDs {
+		for _, c := range aliases.Resources[r].AdditonalCMDs {
 
 			aliasCMDs.Aliases = append(aliasCMDs.Aliases, types.AliasCMD{
-				PrefixShort:   v.Prefix.Short,
+				PrefixShort:   c.Prefix.Short,
 				ResourceShort: aliases.Resources[r].Short,
-				Short:         v.Short,
-				SuffixShort:   v.Suffix.Short,
-				Prefix:        v.Prefix.CMD,
-				CMD:           v.CMD,
+				Short:         c.Short,
+				SuffixShort:   c.Suffix.Short,
+				Prefix:        c.Prefix.CMD,
+				CMD:           c.CMD,
 				Resource:      r,
-				Suffix:        v.Suffix.CMD,
+				Suffix:        c.Suffix.CMD,
 			})
 		}
 
@@ -85,6 +85,7 @@ func Generate(filePath, targetPath string) error {
 
 // GenerateAlias -- TODO document
 func GenerateAlias(w io.Writer, aliases *types.AliasCMDs) error {
+	aliases.AliasNames = make(map[string]string)
 	for _, alias := range aliases.Aliases {
 		if alias.Prefix != "" {
 			alias.Prefix = strings.Trim(alias.Prefix, " ") + " "

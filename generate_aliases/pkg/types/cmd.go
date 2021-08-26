@@ -40,5 +40,3 @@ type AliasCMDs struct {
 	CMDs       []CMD
 	AliasNames map[string]string
 }
-
-type CMDs map[string]CMD
