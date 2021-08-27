@@ -50,20 +50,6 @@ func Generate(filePath, targetPath string) error {
 			})
 		}
 
-		for _, c := range aliases.Resources[r].AdditonalCMDs {
-
-			aliasCMDs.Aliases = append(aliasCMDs.Aliases, types.AliasCMD{
-				PrefixShort:   c.Prefix.Short,
-				ResourceShort: aliases.Resources[r].Short,
-				Short:         c.Short,
-				SuffixShort:   c.Suffix.Short,
-				Prefix:        c.Prefix.CMD,
-				CMD:           c.CMD,
-				Resource:      r,
-				Suffix:        c.Suffix.CMD,
-			})
-		}
-
 	}
 
 	// Take care of any additional aliases
