@@ -35,9 +35,6 @@ resources:
     short: np
   nodes:
     short: n
-    add:
-      - cmd: "drain node --delete-local-data --force --ignore-daemonsets"
-        short: drain
   persistentvolume:
     short: pv
   persistentvolumeclaims:
@@ -48,13 +45,6 @@ resources:
     short: pp
   pods:
     short: p
-    add:
-      - cmd: "logs"
-        short: l
-      - cmd: "logs -f"
-        short: lf
-      - cmd: "exec -it"
-        short: eit
   podsecuritypolicies:
     short: psp
   podtemplates:
@@ -125,3 +115,12 @@ additional:
     cmd: "kubectl delete -f"
   - short: krd
     cmd: "kubectl rollout restart deployment"
+  - short: kdrain
+    cmd: "kubectl drain node --delete-local-data --force --ignore-daemonsets"
+  - short: kl
+    cmd: "kubectl logs"
+  - short: klf
+    cmd: "kubectl logs -f"
+  - short: keit
+    cmd: "kubectl exec -it"
+
