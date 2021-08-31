@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Dbz/kube-aliases/cmd"
+	"github.com/Dbz/kube-aliases/generate/cmd"
 )
 
 func main() {

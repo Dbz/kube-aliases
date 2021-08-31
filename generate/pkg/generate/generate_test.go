@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Dbz/kube-aliases/pkg/types"
+	"github.com/Dbz/kube-aliases/generate/pkg/types"
 	"github.com/stretchr/testify/require"
 )
 
