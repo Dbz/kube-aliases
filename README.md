@@ -29,7 +29,10 @@ from releases. Using our `aliases.yaml` file as a base run
 generate-kube-aliases aliases.yaml ~/.aliases
 ```
 
-Then source `~/.alises`.
+Then the aliases can be sourced 
+```bash
+source ${HOME}/.aliases
+```
 
 ### Customizing Aliases
 
@@ -110,7 +113,8 @@ To simply grab a bunch of aliases without customization simply get the
 
 ## Generate Aliases
 
-Download `generate-kube-aliases` to your any of your bins.
+To easily customize the generated aliases, download `generate-kube-aliases` to
+your any of your bins.
 
 ### AUR
 
