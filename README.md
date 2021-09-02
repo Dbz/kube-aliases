@@ -8,7 +8,7 @@ aliases automatically. For example, if you prefer `rm` to `del` for deleting.
 - [Usage](#usage)
   * [General Alias Rules](#general-alias-rules)
   * [Generating Aliases](#generating-aliases)
-    + [Customizing Aliases](#customizing-aliases)
+    + [Customizing Aliases Yaml](#customizing-aliases-yaml)
       - [resources](#resources)
       - [cmds](#cmds)
       - [additional](#additional)
