@@ -4,6 +4,16 @@ kube-aliases comes with a comprehensive set of aliases for Kubernetes. If desire
 there is a utility tool to generate custom aliases or to change the aliases
 automatically. For example, if you prefer `rm` to `del` for deleting.
 
+[Usage](# Usage)
+    [General Alias Rules](## General Alias Rules)
+    [Generating Aliases](## Generating Aliases)
+        [Customizing Aliases](### Customizing Aliases)
+            [resources](#### resources)
+            [additional](#### additional)
+[Installation](# Installation)
+    [Generate Aliases](## Generate Aliases)
+    [AUR](## AUR)
+    
 # Usage
 
 ## General Alias Rules
@@ -118,7 +128,7 @@ To simply grab a bunch of aliases without customization simply get the
 ## Generate Aliases
 
 
-### AUR
+## AUR
 
 Coming soon
 
