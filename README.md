@@ -36,6 +36,9 @@ source ${HOME}/.aliases
 
 ### Customizing Aliases
 
+To easily customize the generated aliases, download `generate-kube-aliases` to
+your any of your bins. See [installation](## Generate Aliases).
+
 #### resources
 
 Resources defines Kubernetes resources and what the short letter representation
@@ -114,8 +117,6 @@ To simply grab a bunch of aliases without customization simply get the
 
 ## Generate Aliases
 
-To easily customize the generated aliases, download `generate-kube-aliases` to
-your any of your bins.
 
 ### AUR
 
