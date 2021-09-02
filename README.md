@@ -11,6 +11,8 @@ aliases automatically. For example, if you prefer `rm` to `del` for deleting.
             [resources](#### resources)
             [additional](#### additional)
 [Installation](# Installation)
+    [Bash Example](## Bash Example)
+    [Zsh Example](## Zsh Example)
     [Generate Aliases](## Generate Aliases)
     [AUR](## AUR)
     
@@ -125,6 +127,20 @@ additional:
 
 To simply grab a bunch of aliases without customization simply get the
 `aliases` file and source it in your `bashrc` or `zshrc` file.
+
+## Bash Example
+
+```bash
+curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases -o ${HOME}/.kube-aliases
+echo "source ${HOME}/.kube-aliases" >> .bashrc
+```
+
+## Zsh Example
+
+```bash
+curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases -o ${HOME}/.kube-aliases
+echo "source ${HOME}/.kube-aliases" >> .zshrc
+```
 
 ## Generate Aliases
 
