@@ -1,6 +1,6 @@
 # kube-aliases
 
-kube-aliases comes with a simple set of aliases for Kubernetes. If desired
+kube-aliases comes with a comprehensive set of aliases for Kubernetes. If desired,
 there is also a utility tool to generate custom alias or to change the aliases
 automatically.
 
