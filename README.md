@@ -2,7 +2,7 @@
 
 kube-aliases comes with a comprehensive set of aliases for Kubernetes. If desired,
 there is a utility tool to generate custom aliases or to change the aliases
-automatically.
+automatically. For example, if you prefer `rm` to `del` for deleting.
 
 # Usage
 
