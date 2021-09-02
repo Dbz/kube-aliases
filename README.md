@@ -83,6 +83,34 @@ alias kgcrf="kubectl get customresourcefoo"
 
 ### Customizing Aliases Yaml
 
+An example small `alias.yaml` file
+
+```yaml
+# Kubernetes Resources
+resources:
+  pods:
+    short: p
+
+# Commands to add to all resources
+cmds:
+  - short: g
+    cmd: get
+
+# Any other aliases to be generated
+additional:
+  - short: wkgp
+    cmd: "watch kubectl get pods"
+```
+
+Which will generate the following file
+
+```bash
+alias kgp="kubectl get pods"
+alias wkgp="watch kubectl get pods"
+```
+
+
+
 #### resources
 
 Resources defines Kubernetes resources and what the short letter representation
