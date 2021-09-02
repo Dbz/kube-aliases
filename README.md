@@ -1,8 +1,8 @@
 # kube-aliases
 
-kube-aliases comes with a comprehensive set of aliases for Kubernetes. If desired,
-there is a utility tool to generate custom aliases or to change the aliases
-automatically. For example, if you prefer `rm` to `del` for deleting.
+kube-aliases comes with a comprehensive set of aliases for Kubernetes. If
+desired, there is a utility tool to generate custom aliases or to change the
+aliases automatically. For example, if you prefer `rm` to `del` for deleting.
 
 [Usage](# Usage)
     [General Alias Rules](## General Alias Rules)
@@ -96,9 +96,10 @@ cmd:
     cmd: get
 ```
 
-Will generate aliases for get commands for each specified resource in the format `alias kg<resource>=kubectl get <resource>`.
-An example with the `pod` resource is `alias kgp=kubectl get pod`.
-Prefix and suffix will generate commands before and after the alias respectively.
+Will generate aliases for get commands for each specified resource in the
+format `alias kg<resource>=kubectl get <resource>`.  An example with the `pod`
+resource is `alias kgp=kubectl get pod`.  Prefix and suffix will generate
+commands before and after the alias respectively.
 
 
 
