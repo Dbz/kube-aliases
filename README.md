@@ -81,10 +81,7 @@ would generate the `.kube-aliases-additional` file with content
 alias kgcrf="kubectl get customresourcefoo"
 ```
 
-### Customizing Aliases
-
-To easily customize the generated aliases, download `generate-kube-aliases` to
-your any of your bins. See [installation](#generate-aliases).
+### Customizing Aliases Yaml
 
 #### resources
 
