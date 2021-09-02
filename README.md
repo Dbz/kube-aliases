@@ -34,16 +34,48 @@ kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kub
 
 ## Generating Aliases
 
-Want to generate custom aliases? Install the latest `generate-kube-aliases`
-from releases. Using our `aliases.yaml` file as a base run
+Want to generate custom aliases? [Install](## Generate Aliases) the latest `generate-kube-aliases`
+from releases. Then grab a copy of the default `aliases.yaml` with
 
 ```bash
-generate-kube-aliases aliases.yaml ~/.aliases
+curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases.yaml -o ${HOME}/aliases.yaml
 ```
 
-Then the aliases can be sourced 
+Modify `aliases.yaml` to make any desired changes and generate the aliases with
 ```bash
-source ${HOME}/.aliases
+generate-kube-aliases aliases.yaml ~/.kube-aliases
+```
+
+and then source it in the `.bashrc` or `.zshrc` file.
+
+```bash
+echo "source ${HOME}/.kube-aliases" >> .bashrc
+```
+
+Or following the same steps, one can create a smaller list of only additional
+content. For example in a `additonal.yaml` file
+
+```yaml
+resources:
+  customresourcefoo:
+    short: crf
+
+cmds:
+  - short: g
+    cmd: get
+```
+
+and 
+
+```bash
+generate-kube-aliases additional.yaml ~/.kube-aliases-additional
+echo "source ${HOME}/.additional.yaml" >> .bashrc
+```
+
+would generate the `.kube-aliases-additional` file with content
+
+```bash
+alias kgcrf="kubectl get customresourcefoo"
 ```
 
 ### Customizing Aliases
