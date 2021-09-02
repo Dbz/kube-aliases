@@ -14,7 +14,7 @@ Aliases follow the following conventions:
 k           # kubectl
 kc<r>       # kubectl create <resource>, e.g. kcd for kubectl create deployment
 kdel<r>     # kubectl delete <resource>, e.g. kdelp for kubectl delete pods
-kd<r>       # kubectl describe <resource>, e.g. kdsp for kubectl describe pod
+kd<r>       # kubectl describe <resource>, e.g. kdp for kubectl describe pod
 ke<r>       # kubectl edit <resource>, e.g. kgp for kubectl edit pods
 kg<r>       # kubectl get <resource>, e.g. kgp for kubectl get pods
 kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
