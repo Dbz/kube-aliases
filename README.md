@@ -4,17 +4,20 @@ kube-aliases comes with a comprehensive set of aliases for Kubernetes. If
 desired, there is a utility tool to generate custom aliases or to change the
 aliases automatically. For example, if you prefer `rm` to `del` for deleting.
 
-[Usage](# Usage)
-    [General Alias Rules](## General Alias Rules)
-    [Generating Aliases](## Generating Aliases)
-        [Customizing Aliases](### Customizing Aliases)
-            [resources](#### resources)
-            [additional](#### additional)
-[Installation](# Installation)
-    [Bash Example](## Bash Example)
-    [Zsh Example](## Zsh Example)
-    [Generate Aliases](## Generate Aliases)
-    [AUR](## AUR)
+- [kube-aliases](#kube-aliases)
+- [Usage](#usage)
+  * [General Alias Rules](#general-alias-rules)
+  * [Generating Aliases](#generating-aliases)
+    + [Customizing Aliases](#customizing-aliases)
+      - [resources](#resources)
+      - [cmds](#cmds)
+      - [additional](#additional)
+- [Installation](#installation)
+  * [Bash Example](#bash-example)
+  * [Zsh Example](#zsh-example)
+  * [Generate Aliases](#generate-aliases)
+  * [AUR](#aur)
+ 
     
 # Usage
 
@@ -34,7 +37,7 @@ kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kub
 
 ## Generating Aliases
 
-Want to generate custom aliases? [Install](## Generate Aliases) the latest `generate-kube-aliases`
+Want to generate custom aliases? [Install](#generate-aliases) the latest `generate-kube-aliases`
 from releases. Then grab a copy of the default `aliases.yaml` with
 
 ```bash
@@ -81,7 +84,7 @@ alias kgcrf="kubectl get customresourcefoo"
 ### Customizing Aliases
 
 To easily customize the generated aliases, download `generate-kube-aliases` to
-your any of your bins. See [installation](## Generate Aliases).
+your any of your bins. See [installation](#generate-aliases).
 
 #### resources
 
