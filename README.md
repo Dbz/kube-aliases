@@ -83,7 +83,8 @@ cmd:
     cmd: get
 ```
 
-Will generate all get commands for specified resource, i.e. `alias kgp="kubectl get pods"`
+Will generate aliases for get commands for each specified resource in the format `alias kg<resource>=kubectl get <resource>`.
+An example with the `pod` resource is `alias kgp=kubectl get pod`.
 Prefix and suffix will generate commands before and after the alias respectively.
 
 
