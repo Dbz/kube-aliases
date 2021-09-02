@@ -128,6 +128,7 @@ To simply grab a bunch of aliases without customization simply get the
 
 ## Generate Aliases
 
+Coming soon
 
 ## AUR
 
