@@ -8,7 +8,7 @@ automatically.
 
 ## General Alias Rules
 
-In general the defaults follow the following conventions:
+Aliases follow the following conventions:
 
 ```bash
 k           # kubectl
