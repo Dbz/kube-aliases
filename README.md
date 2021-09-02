@@ -59,7 +59,7 @@ Which will generate aliases `alias k<cmd>p=kubectl <cmd> pod`.
 
 ####  cmds
 
-`cmd` will generate the main command on all resources.
+The cmd block will generate commands on all resources.
 
 ```yaml
 cmd:
