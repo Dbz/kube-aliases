@@ -56,7 +56,7 @@ echo "source ${HOME}/.kube-aliases" >> .bashrc
 ```
 
 Or following the same steps, one can create a smaller list of only additional
-content. For example in a `additonal.yaml` file
+content. For example in an `additonal.yaml` file
 
 ```yaml
 resources:
