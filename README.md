@@ -163,7 +163,7 @@ format `alias kg<resource>=kubectl get <resource>`.  An example with the `pod`
 resource is `alias kgp=kubectl get pod`.  Prefix and suffix will generate
 commands before and after the alias respectively.
 
-Prefix example that will generate `alias wkg<resource short>=watch kubectl get <resource>`.
+Here is an example cmd prefix that will generate `alias wkg<resource short>=watch kubectl get <resource>`:
 
 ```yaml
   - short: g
