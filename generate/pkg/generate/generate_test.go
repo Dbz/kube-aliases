@@ -77,7 +77,7 @@ func TestGenerateAlias(t *testing.T) {
 					Suffix:        "",
 				}},
 			},
-			Expected: "alias wkgp=\"watch kubectl get pods\"\n",
+			Expected: "\n# Manage pods.\nalias wkgp=\"watch kubectl get pods\"\n",
 			Err:      nil,
 		},
 		// Testing with suffix
@@ -94,7 +94,7 @@ func TestGenerateAlias(t *testing.T) {
 					Suffix:        "zed",
 				}},
 			},
-			Expected: "alias kgpz=\"kubectl get pods zed\"\n",
+			Expected: "\n# Manage pods.\nalias kgpz=\"kubectl get pods zed\"\n",
 			Err:      nil,
 		},
 		// Testing without prefix or suffix
@@ -111,17 +111,30 @@ func TestGenerateAlias(t *testing.T) {
 					Suffix:        "",
 				}},
 			},
-			Expected: "alias kgp=\"kubectl get pods\"\n",
+			Expected: "\n# Manage pods.\nalias kgp=\"kubectl get pods\"\n",
 		},
 		// Testing short command
 		{
 			Input: &types.AliasCMDs{
-				CMDs: []types.CMD{{
-					Short: "et",
-					CMD:   "echo 'hello world'",
-				}},
+				CMDs: []types.CMD{
+					{
+						Short:   "et",
+						CMD:     "echo 'hello world'",
+						Comment: "Echo Commands.",
+					},
+					{
+						Short:   "em",
+						CMD:     "echo 'hello me'",
+						Comment: "Echo Commands.",
+					},
+					{
+						Short:   "eq",
+						CMD:     "echo 'hello q'",
+						Comment: "New Echo Commands.",
+					},
+				},
 			},
-			Expected: "alias et=\"echo 'hello world'\"\n",
+			Expected: "\n# Echo Commands.\nalias et=\"echo 'hello world'\"\nalias em=\"echo 'hello me'\"\n\n# New Echo Commands.\nalias eq=\"echo 'hello q'\"\n",
 		},
 		// TODO: expecting errors for AliasCMDs.Aliases
 		// TODO: expecting errors for AliasCMDs.CMDs

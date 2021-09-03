@@ -2,8 +2,9 @@ package types
 
 // CMD contains a Kubernetes Command and its short aliases
 type CMD struct {
-	CMD   string `yaml:"cmd"`
-	Short string `yaml:"short"`
+	CMD     string `yaml:"cmd"`
+	Short   string `yaml:"short"`
+	Comment string `yaml:"comment"`
 	// TODO: Added suffix and prefix commands
 	Prefix PrefixCMD `yaml:"prefix"`
 	Suffix SuffixCMD `yaml:"suffix"`
