@@ -99,28 +99,41 @@ cmds:
 additional:
   - short: k
     cmd: "kubectl"
+    comment: "CLI aliases."
   - short: kctx
     cmd: "kubectx"
+    comment: "CLI aliases."
   - short: kns
     cmd: "kubens"
+    comment: "CLI aliases."
   - short: kcf
     cmd: "kubectl create -f"
+    comment: "Pushing/modifying configs."
   - short: kaf
     cmd: "kubectl apply -f"
+    comment: "Pushing/modifying configs."
   - short: kgf
     cmd: "kubectl get -f"
+    comment: "Pushing/modifying configs."
   - short: kef
     cmd: "kubectl edit -f"
+    comment: "Pushing/modifying configs."
   - short: kdelf
     cmd: "kubectl delete -f"
+    comment: "Pushing/modifying configs."
   - short: krd
     cmd: "kubectl rollout restart deployment"
+    comment: "Modifying deployments."
   - short: kdrain
     cmd: "kubectl drain node --delete-local-data --force --ignore-daemonsets"
+    comment: "Draining nodes."
   - short: kl
     cmd: "kubectl logs"
+    comment: "Logging commands."
   - short: klf
     cmd: "kubectl logs -f"
+    comment: "Logging commands."
   - short: keit
     cmd: "kubectl exec -it"
+    comment: "Exec alias."
 
