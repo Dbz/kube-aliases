@@ -9,7 +9,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/Dbz/kube-aliases/pkg/types"
+	"github.com/Dbz/kube-aliases/generate/pkg/types"
 )
 
 func Generate(filePath, targetPath string) error {

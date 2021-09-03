@@ -1,4 +1,4 @@
-module github.com/Dbz/kube-aliases
+module github.com/Dbz/kube-aliases/generate
 
 go 1.16
 

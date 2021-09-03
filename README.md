@@ -1,96 +1,230 @@
 # kube-aliases
 
-This is an oh-my-zsh plugin (or source `kube-aliases.plugin.zsh` for bash) to
-make working with Kubernetes easier. It provides a bunch of bash aliases and
-Zsh functions. 
+kube-aliases comes with a comprehensive set of aliases for Kubernetes. If
+desired, there is a utility tool to generate custom aliases or to change the
+aliases automatically. For example, if you prefer `rm` to `del` for deleting.
 
-## Usage
+- [kube-aliases](#kube-aliases)
+- [Usage](#usage)
+  * [General Alias Rules](#general-alias-rules)
+  * [Generating Aliases](#generating-aliases)
+    + [Customizing Aliases Yaml](#customizing-aliases-yaml)
+      - [resources](#resources)
+      - [cmds](#cmds)
+      - [additional](#additional)
+- [Installation](#installation)
+  * [Bash Example](#bash-example)
+  * [Zsh Example](#zsh-example)
+  * [Generate Aliases](#generate-aliases)
+  * [AUR](#aur)
+ 
+    
+# Usage
 
-### Aliases
+## General Alias Rules
 
-For help, run `khelp`:
-
-In general and when it makes sense, aliases follow the following conventions.
+Aliases follow the following conventions:
 
 ```bash
 k           # kubectl
-kdel<r>       # kubectl delete <resource>, e.g. kgp for kubectl delete pods
-kd<r>      # kubectl describe <resource>, e.g. kdsp for kubectl describe pod
-ke<r>       # kubectl edit <resource>, e.g. kgp for kubectl edit pods
+kc<r>       # kubectl create <resource>, e.g. kcd for kubectl create deployment
+kdel<r>     # kubectl delete <resource>, e.g. kdelp for kubectl delete pods
+kd<r>       # kubectl describe <resource>, e.g. kdp for kubectl describe pod
+ke<r>       # kubectl edit <resource>, e.g. kep for kubectl edit pods
 kg<r>       # kubectl get <resource>, e.g. kgp for kubectl get pods
 kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
 ```
 
-However, these aliases can be customize by editing the config file
-aliases.yaml. See customizing.
+## Generating Aliases
 
-There is also some other useful commands such as the following:
-
-```bash
-kcon       # create configuration files
-kdap       # delete all pods within a namespace
-kdrain     # drain a node
-keit       # execute a command in a specified pod,
-           # default drops user into a shell
-kfind      # use a regular expression to find items across everything except
-           # custom resources
-kgpns      # Get just pod names in a namespace
-kl         # kubectl logs <podname>
-klf        # kubectl logs -f <podname>: i.e. watch logs live
-kpfind     # Search through pods with regular expressions
-kdfind     # Search through deployments with regular expressions
-krd        # restart a deployment
-kstatus    # search across namespaces to find pods statuses
-```
-There is more, but can be found in `bin/` or by running `khelp -f`.
-
-Not everything is currently implemented, but more and more is being added to
-the list. If something is missing that is desired, feel free to submit a pull
-request.
-
-
-## Installation
-
-### Oh-My-Zsh
-
-```
-git clone git@github.com:Dbz/kube-aliases.git ~/.oh-my-zsh/custom/plugins/kube-aliases
-echo "plugins+=(kube-aliases)" >> ~/.zshrc
-```
-
-You can also manually place `zsh-kuberenetes` inside of `plugins=(...)`
-
-If you have set the `ZSH_CUSTOM` environment variable in your zshrc, then you should modify the git clone directory to be `$ZSH_CUSTOM/plugins/kube-aliases`.
-
-### Antigen
-
-Add `antigen bundle dbz/kube-aliases` to your antigen bundles in your `.zshrc`
-
-### Zgen
-
-Add `zgen load dbz/kube-aliases` to your zgen plugins in your `.zshrc`
-
-### Bash
-
-Source `kube-aliases.plugin.zsh` in your `.bashrc`.
-
-### Aliases for Kubernetes Extensions
-
-#### kubectx
-For easy context and namespace switching there is
-[kubectx](https://github.com/ahmetb/kubectx). `kubectx` allows users context
-switching, and the linked github comes with `kubens` which allows for simple
-namespace switching. You can use the following aliases:
+Want to generate custom aliases? [Install](#generate-aliases) the latest `generate-kube-aliases`
+from releases. Then grab a copy of the default `aliases.yaml` with
 
 ```bash
-alias kctx='kubectx'
-alias kns='kubens'
+curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases.yaml -o ${HOME}/aliases.yaml
 ```
 
-# Customizing Aliases
+Modify `aliases.yaml` to make any desired changes and generate the aliases with
+```bash
+generate-kube-aliases aliases.yaml ~/.kube-aliases
+```
 
-The `aliases.yaml` is used to generate aliases. It can be modified and aliases
-updated with `generate-kube-aliases aliases.yaml aliases` in the root directory of this project. 
+and then source it in the `.bashrc` or `.zshrc` file.
 
-`generate-kube-aliases` is written in go and can be built inside of the directory
-`generate_aliases` with `make`.
+```bash
+echo "source ${HOME}/.kube-aliases" >> .bashrc
+```
+
+Or following the same steps, one can create a smaller list of only additional
+content. For example in an `additonal.yaml` file
+
+```yaml
+resources:
+  customresourcefoo:
+    short: crf
+
+cmds:
+  - short: g
+    cmd: get
+```
+
+and 
+
+```bash
+generate-kube-aliases additional.yaml ~/.kube-aliases-additional
+echo "source ${HOME}/.additional.yaml" >> .bashrc
+```
+
+would generate the `.kube-aliases-additional` file with content
+
+```bash
+alias kgcrf="kubectl get customresourcefoo"
+```
+
+### Customizing Aliases Yaml
+
+An example small `alias.yaml` file
+
+```yaml
+# Kubernetes Resources
+resources:
+  pods:
+    short: p
+
+# Commands to add to all resources
+cmds:
+  - short: g
+    cmd: get
+
+# Any other aliases to be generated
+additional:
+  - short: wkgp
+    cmd: "watch kubectl get pods"
+```
+
+Which will generate the following file
+
+```bash
+alias kgp="kubectl get pods"
+alias wkgp="watch kubectl get pods"
+```
+
+
+
+#### resources
+
+Resources defines Kubernetes resources and what the short letter representation
+should be.
+
+```yaml
+resources:
+  <resource>:
+    short: <short name>
+```
+
+For example
+
+```yaml
+resources:
+  pods:
+    short: p
+```
+
+Which will generate aliases `alias k<cmd>p=kubectl <cmd> pod`.
+
+####  cmds
+
+The cmd block will generate commands on all resources.
+
+```yaml
+cmd:
+  - short: <short name>
+    cmd: <cmd>
+    # Optional
+    prefix:
+      short: <short name>
+      cmd: <cmd>
+    # Optional
+    suffix:
+      short: <short name>
+      cmd: <cmd>
+```
+
+For example:
+
+```yaml
+cmd:
+  - short: g
+    cmd: get
+```
+
+Will generate aliases for get commands for each specified resource in the
+format `alias kg<resource>=kubectl get <resource>`.  An example with the `pod`
+resource is `alias kgp=kubectl get pod`.  Prefix and suffix will generate
+commands before and after the alias respectively.
+
+Here is an example cmd prefix that will generate `alias wkg<resource short>=watch kubectl get <resource>`:
+
+```yaml
+  - short: g
+    cmd: get
+    prefix:
+      short: w
+      cmd: watch
+```
+
+
+#### additional
+
+Any other aliases can be generated by the following
+
+```yaml
+additional:
+  - short: <short>
+    cmd: <cmd>
+```
+
+The following will generate `alias eh="echo hello"`
+
+```yaml
+additional:
+  - short: eh
+    cmd: "echo hello"
+```
+
+or an example alias we actually are using, 
+`alias krd="kubectl rollout restart deployment"`
+
+```yaml
+additional:
+  - short: krd
+    cmd: "kubectl rollout restart deployment"
+```
+
+# Installation
+
+To simply grab a bunch of aliases without customization simply get the
+`aliases` file and source it in your `bashrc` or `zshrc` file.
+
+## Bash Example
+
+```bash
+curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases -o ${HOME}/.kube-aliases
+echo "source ${HOME}/.kube-aliases" >> .bashrc
+```
+
+## Zsh Example
+
+```bash
+curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases -o ${HOME}/.kube-aliases
+echo "source ${HOME}/.kube-aliases" >> .zshrc
+```
+
+## Generate Aliases
+
+Coming soon
+
+## AUR
+
+Coming soon
+

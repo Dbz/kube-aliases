@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Dbz/kube-aliases/pkg/generate"
+	"github.com/Dbz/kube-aliases/generate/pkg/generate"
 
 	"github.com/spf13/cobra"
 )
