@@ -125,7 +125,7 @@ additional:
     cmd: "kubectl rollout restart deployment"
     comment: "Modifying deployments."
   - short: kdrain
-    cmd: "kubectl drain node --delete-local-data --force --ignore-daemonsets"
+    cmd: "kubectl drain --delete-emptydir-data --force --ignore-daemonsets"
     comment: "Draining nodes."
   - short: kl
     cmd: "kubectl logs"
