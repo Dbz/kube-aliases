@@ -33,7 +33,7 @@ func Generate(filePath, targetPath string) error {
 
 	_, err = io.WriteString(aliasFile, "#!/bin/bash\n")
 	if err != nil {
-		return fmt.Errorf("Warning: could not write shebang", err)
+		return fmt.Errorf("Warning: could not write shebang: %v", err)
 	}
 
 	var aliasBuilder strings.Builder
