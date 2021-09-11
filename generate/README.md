@@ -22,6 +22,7 @@ cmds:
 additional:
   - short: wkgp
     cmd: "watch kubectl get pods"
+    comment: "Additional pod commands."
 ```
 
 Which will generate the following file
@@ -35,7 +36,7 @@ by running
 
 ```bash
 make
-bin/generate-kube-aliases alias.yaml aliases
+bin/generate-kube-aliases alias.yaml aliases.sh
 ```
 
 # Contributing

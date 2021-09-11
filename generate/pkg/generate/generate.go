@@ -31,6 +31,11 @@ func Generate(filePath, targetPath string) error {
 	}
 	defer aliasFile.Close()
 
+	_, err = io.WriteString(aliasFile, "#!/bin/bash\n")
+	if err != nil {
+		return fmt.Errorf("Warning: could not write shebang", err)
+	}
+
 	var aliasBuilder strings.Builder
 	var aliasCMDs types.AliasCMDs
 	for r := range aliases.Resources {

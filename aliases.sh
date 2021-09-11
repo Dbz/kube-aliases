@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # Manage events.
 alias kcev="kubectl create events"
