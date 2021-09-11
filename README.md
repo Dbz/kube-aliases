@@ -26,20 +26,21 @@ aliases automatically. For example, if you prefer `rm` to `del` for deleting.
 Aliases follow the following conventions:
 
 ```bash
-k           # kubectl
-kc<r>       # kubectl create <resource>, e.g. kcd for kubectl create deployment
-kdel<r>     # kubectl delete <resource>, e.g. kdelp for kubectl delete pods
-kd<r>       # kubectl describe <resource>, e.g. kdp for kubectl describe pod
-kg<r>       # kubectl get <resource>, e.g. kgp for kubectl get pods
-kg<r>g      # kubectl get <resource> -o wide | grep , e.g. kgp for kubectl get pods -o wide | grep
-kga<r>      # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
-kga<r>g      # kubectl get --all-namespaces -o wide <resource> | grep , e.g. kgap for kubectl --all-namespaces -o wide get pods | grep
-# The following returns a list of names of a resource
-kg<r>n      # kubectl get <resource> -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'", e.g. kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'"
+k             # kubectl
+kc<r>         # kubectl create <resource>, e.g. kcd for kubectl create deployment
+kdel<r>       # kubectl delete <resource>, e.g. kdelp for kubectl delete pods
+kd<r>         # kubectl describe <resource>, e.g. kdp for kubectl describe pod
+kg<r>         # kubectl get <resource>, e.g. kgp for kubectl get pods
+kg<r>g        # kubectl get <resource> -o wide | grep, e.g. kgpg for kubectl get pods -o wide | grep
+kga<r>        # kubectl get --all-namespaces -o wide <resource>, e.g. kgap for kubectl --all-namespaces -o wide get pods
+kga<r>g       # kubectl get --all-namespaces -o wide <resource> | grep, e.g. kgap for kubectl --all-namespaces -o wide get pods | grep
+kgy<r>        # kubectl get <resource> -o yaml, e.g. kgyp for kubectl get pods -o yaml
+ke<r>         # kubectl edit <resource>, e.g. kep for kubectl edit pods
 wkg<resource> # watch kubectl get <resource>, e.g. wkgp for watch kubectl get pods
-wkga<r>      # watch kubectl get --all-namespaces -o wide <resource>, e.g. kgap for watch kubectl --all-namespaces -o wide get pods
-kgy<r>       # kubectl get <resource> -o yaml, e.g. kgp for kubectl get pods -o yaml
-ke<r>       # kubectl edit <resource>, e.g. kep for kubectl edit pods
+wkga<r>       # watch kubectl get --all-namespaces -o wide <resource>, e.g. kgap for watch kubectl --all-namespaces -o wide get pods
+
+# The following returns a list of names of a resource
+kg<r>n       # kubectl get <resource> -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'", e.g. kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'"
 ```
 
 ## Generating Aliases
