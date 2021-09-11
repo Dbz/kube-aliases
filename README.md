@@ -213,19 +213,21 @@ All commands with the same comment will be grouped together in the generated fil
 To grab a bunch of aliases without customization get the
 `aliases.sh` file and source it in your `bashrc` or `zshrc` file.
 
-## Bash Example
-
 ```bash
 curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases.sh -o ${HOME}/.kube-aliases.sh
 echo "source ${HOME}/.kube-aliases.sh" >> .bashrc
 ```
 
-## Zsh Example
+## Oh-My-Zsh Example
+
+To install this as a plugin:
 
 ```bash
-curl https://raw.githubusercontent.com/Dbz/kube-aliases/master/aliases.sh -o ${HOME}/.kube-aliases.sh
-echo "source ${HOME}/.kube-aliases.sh" >> .zshrc
+git clone https://github.com/Dbz/kube-aliases.git ~/.oh-my-zsh/custom/plugins/kube-aliases
+echo "plugins+=(kube-aliases)" >> ~/.zshrc
 ```
+
+If you set the `ZSH_CUSTOM` environment variable, then you should modify the git clone directory to be `$ZSH_CUSTOM/plugins/kube-aliases`.
 
 ## Generate Aliases
 
