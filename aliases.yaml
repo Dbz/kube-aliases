@@ -77,22 +77,18 @@ cmds:
     cmd: describe
   - short: g
     cmd: get
-
   - short: g
     cmd: get
     suffix:
       short: g
       cmd: " -o wide | grep"
-
   - short: ga
     cmd: "get --all-namespaces -o wide"
-
   - short: ga
     cmd: "get --all-namespaces -o wide"
     suffix:
       short: g
       cmd: " -o wide | grep"
-
   - short: g
     cmd: get
     suffix:
@@ -104,7 +100,11 @@ cmds:
     prefix:
       short: w
       cmd: watch
-
+  - short: ga
+    cmd: "get --all-namespaces -o wide"
+    prefix:
+      short: w
+      cmd: watch
   - short: gy
     cmd: "get -o yaml"
   - short: e
