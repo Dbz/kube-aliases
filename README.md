@@ -37,10 +37,10 @@ kga<r>g       # kubectl get --all-namespaces -o wide <resource> | grep, e.g. kga
 kgy<r>        # kubectl get <resource> -o yaml, e.g. kgyp for kubectl get pods -o yaml
 ke<r>         # kubectl edit <resource>, e.g. kep for kubectl edit pods
 wkg<resource> # watch kubectl get <resource>, e.g. wkgp for watch kubectl get pods
-wkga<r>       # watch kubectl get --all-namespaces -o wide <resource>, e.g. kgap for watch kubectl --all-namespaces -o wide get pods
+wkga<r>       # watch kubectl get --all-namespaces -o wide <resource>, e.g. wkgap for watch kubectl --all-namespaces -o wide get pods
 
-# The following returns a list of names of a resource
-kg<r>n       # kubectl get <resource> -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'", e.g. kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'"
+# Get all names of a resource
+kg<r>n       # kubectl get <resource> -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'", e.g. kgpn for kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\" \"}}{{end}}'"
 ```
 
 ## Generating Aliases
