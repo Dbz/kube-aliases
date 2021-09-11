@@ -77,8 +77,18 @@ cmds:
     cmd: describe
   - short: g
     cmd: get
+  - short: g
+    cmd: get
+    suffix:
+      short: g
+      cmd: " -o wide | grep"
   - short: ga
     cmd: "get --all-namespaces -o wide"
+  - short: ga
+    cmd: "get --all-namespaces -o wide"
+    suffix:
+      short: g
+      cmd: " | grep"
   - short: g
     cmd: get
     suffix:
@@ -90,7 +100,11 @@ cmds:
     prefix:
       short: w
       cmd: watch
-
+  - short: ga
+    cmd: "get --all-namespaces -o wide"
+    prefix:
+      short: w
+      cmd: watch
   - short: gy
     cmd: "get -o yaml"
   - short: e
@@ -99,28 +113,41 @@ cmds:
 additional:
   - short: k
     cmd: "kubectl"
+    comment: "CLI aliases."
   - short: kctx
     cmd: "kubectx"
+    comment: "CLI aliases."
   - short: kns
     cmd: "kubens"
+    comment: "CLI aliases."
   - short: kcf
     cmd: "kubectl create -f"
+    comment: "Pushing/modifying configs."
   - short: kaf
     cmd: "kubectl apply -f"
+    comment: "Pushing/modifying configs."
   - short: kgf
     cmd: "kubectl get -f"
+    comment: "Pushing/modifying configs."
   - short: kef
     cmd: "kubectl edit -f"
+    comment: "Pushing/modifying configs."
   - short: kdelf
     cmd: "kubectl delete -f"
+    comment: "Pushing/modifying configs."
   - short: krd
     cmd: "kubectl rollout restart deployment"
+    comment: "Modifying deployments."
   - short: kdrain
-    cmd: "kubectl drain node --delete-local-data --force --ignore-daemonsets"
+    cmd: "kubectl drain --delete-emptydir-data --force --ignore-daemonsets"
+    comment: "Draining nodes."
   - short: kl
     cmd: "kubectl logs"
+    comment: "Logging commands."
   - short: klf
     cmd: "kubectl logs -f"
+    comment: "Logging commands."
   - short: keit
     cmd: "kubectl exec -it"
+    comment: "Exec alias."
 

@@ -72,6 +72,7 @@ func Generate(filePath, targetPath string) error {
 // GenerateAlias -- TODO document
 func GenerateAlias(w io.Writer, aliases *types.AliasCMDs) error {
 	aliases.AliasNames = make(map[string]string)
+	var lastResource string
 	for _, alias := range aliases.Aliases {
 		if alias.Prefix != "" {
 			alias.Prefix = strings.Trim(alias.Prefix, " ") + " "
@@ -98,9 +99,15 @@ func GenerateAlias(w io.Writer, aliases *types.AliasCMDs) error {
 		}
 		aliases.AliasNames[aliasName] = aliasCommand
 
+		if alias.Resource != lastResource {
+			fmt.Fprintf(w, "\n# Manage %s.\n", alias.Resource)
+			lastResource = alias.Resource
+		}
+
 		fmt.Fprintf(w, "alias %v=\"%v\"\n", aliasName, aliasCommand)
 	}
 
+	var comment string
 	for _, alias := range aliases.CMDs {
 		if v, ok := aliases.AliasNames[alias.Short]; ok {
 			err := fmt.Errorf("Duplicate aliases exist. %v can mean:\n1. %v\n2. %v\n",
@@ -108,6 +115,11 @@ func GenerateAlias(w io.Writer, aliases *types.AliasCMDs) error {
 			return err
 		}
 		aliases.AliasNames[alias.Short] = alias.CMD
+
+		if alias.Comment != comment {
+			fmt.Fprintf(w, "\n# %s\n", alias.Comment)
+			comment = alias.Comment
+		}
 
 		fmt.Fprintf(w, "alias %v=\"%v\"\n", alias.Short, alias.CMD)
 	}
