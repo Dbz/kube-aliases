@@ -88,7 +88,7 @@ cmds:
     cmd: "get --all-namespaces -o wide"
     suffix:
       short: g
-      cmd: " -o wide | grep"
+      cmd: " | grep"
   - short: g
     cmd: get
     suffix:
