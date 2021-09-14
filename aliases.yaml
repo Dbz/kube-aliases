@@ -67,6 +67,8 @@ resources:
     short: s
   statefulsets:
     short: ss
+  storageclasses:
+    short: cls
 
 cmds:
   - short: c
@@ -113,6 +115,9 @@ cmds:
 additional:
   - short: k
     cmd: "kubectl"
+    comment: "CLI aliases."
+  - short: kg
+    cmd: "kubectl get"
     comment: "CLI aliases."
   - short: kctx
     cmd: "kubectx"
