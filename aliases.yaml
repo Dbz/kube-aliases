@@ -68,7 +68,7 @@ resources:
   statefulsets:
     short: ss
   storageclasses:
-    short: cls
+    short: scls
 
 cmds:
   - short: c
