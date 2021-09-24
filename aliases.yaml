@@ -15,7 +15,7 @@ resources:
     short: cj
   daemonsets:
     short: ds
-  deployments:
+  deployment:
     short: d
   endpoints:
     short: ep
