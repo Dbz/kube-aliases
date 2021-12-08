@@ -118,6 +118,7 @@ additional:
     comment: "CLI aliases."
   - short: kg
     cmd: "kubectl get"
+    comment: "CLI aliases."
   - short: kd
     cmd: "kubectl describe"
     comment: "CLI aliases."
