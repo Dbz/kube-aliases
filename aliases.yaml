@@ -45,7 +45,7 @@ resources:
     short: pp
   pod:
     short: p
-  podsecuritypolicie:
+  podsecuritypolicy:
     short: psp
   podtemplate:
     short: pt
