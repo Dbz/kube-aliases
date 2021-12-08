@@ -12,7 +12,7 @@ import (
 	"github.com/Dbz/kube-aliases/generate/pkg/types"
 )
 
-func Generate(filePath, targetPath string) error {
+func Generate(filePath, targetPath string, powershell bool) error {
 	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return fmt.Errorf("error reading file %s with error %s",
@@ -37,6 +37,7 @@ func Generate(filePath, targetPath string) error {
 	}
 
 	var aliasBuilder strings.Builder
+
 	var aliasCMDs types.AliasCMDs
 	for r := range aliases.Resources {
 
@@ -60,7 +61,7 @@ func Generate(filePath, targetPath string) error {
 	// Take care of any additional aliases
 	aliasCMDs.CMDs = aliases.Additional
 
-	err = GenerateAlias(&aliasBuilder, &aliasCMDs)
+	err = GenerateAlias(&aliasBuilder, &aliasCMDs, powershell)
 	if err != nil {
 		return err
 	}
@@ -75,7 +76,8 @@ func Generate(filePath, targetPath string) error {
 }
 
 // GenerateAlias -- TODO document
-func GenerateAlias(w io.Writer, aliases *types.AliasCMDs) error {
+func GenerateAlias(w io.Writer,
+	aliases *types.AliasCMDs, powershell bool) error {
 	aliases.AliasNames = make(map[string]string)
 	var lastResource string
 	for _, alias := range aliases.Aliases {
@@ -109,7 +111,14 @@ func GenerateAlias(w io.Writer, aliases *types.AliasCMDs) error {
 			lastResource = alias.Resource
 		}
 
-		fmt.Fprintf(w, "alias %v=\"%v\"\n", aliasName, aliasCommand)
+		if !powershell {
+			fmt.Fprintf(w, "alias %v=\"%v\"\n", aliasName, aliasCommand)
+		} else {
+			ps1prefix := "ps1_"
+			fmt.Fprintf(w, "function %v%v {%v}\n", ps1prefix, aliasName, aliasCommand)
+			fmt.Fprintf(w, "New-Alias -Name %v -Value %v%v\n", aliasName, ps1prefix, aliasName)
+		}
+
 	}
 
 	var comment string
@@ -126,7 +135,13 @@ func GenerateAlias(w io.Writer, aliases *types.AliasCMDs) error {
 			comment = alias.Comment
 		}
 
-		fmt.Fprintf(w, "alias %v=\"%v\"\n", alias.Short, alias.CMD)
+		if !powershell {
+			fmt.Fprintf(w, "alias %v=\"%v\"\n", alias.Short, alias.CMD)
+		} else {
+			ps1prefix := "ps1_"
+			fmt.Fprintf(w, "function %v%v {%v}\n", ps1prefix, alias.Short, alias.CMD)
+			fmt.Fprintf(w, "New-Alias -Name %v -Value %v%v\n", alias.Short, ps1prefix, alias.Short)
+		}
 	}
 	return nil
 }

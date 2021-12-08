@@ -46,7 +46,7 @@ func TestGenerateDuplicates(t *testing.T) {
 
 	for _, tc := range tt {
 
-		err := Generate(tc.aliasYAML, tc.outputFile)
+		err := Generate(tc.aliasYAML, tc.outputFile, false)
 
 		if tc.err == "" {
 			require.NoError(t, err)
@@ -142,7 +142,7 @@ func TestGenerateAlias(t *testing.T) {
 
 	for _, c := range tcs {
 		var b strings.Builder
-		err := GenerateAlias(&b, c.Input)
+		err := GenerateAlias(&b, c.Input, false)
 		recieved := b.String()
 		if err != nil && c.Err == nil {
 			t.Errorf("Received err generating aliases: {%v}", err)
