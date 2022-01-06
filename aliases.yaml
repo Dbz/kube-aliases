@@ -1,72 +1,74 @@
 resources:
-  certificatesigningrequests:
+  certificatesigningrequest:
     short: csr
-  clusterrolebindings:
+  clusterrolebinding:
     short: crb
-  clusterroles:
+  clusterrole:
     short: cr
   componentstatus:
     short: cs
-  configmaps:
+  configmap:
     short: cm
-  controllerrevisions:
+  controllerrevision:
     short: crv
-  cronjobs:
+  cronjob:
     short: cj
-  daemonsets:
+  daemonset:
     short: ds
-  deployments:
+  deployment:
     short: d
-  endpoints:
+  endpoint:
     short: ep
-  events:
+  event:
     short: ev
-  horizontalpodautoscalers:
+  horizontalpodautoscaler:
     short: hpas
   ingress:
     short: i
-  jobs:
+  job:
     short: j
-  limitranges:
+  limitrange:
     short: lr
-  namespaces:
+  namespace:
     short: ns
-  networkpolicies:
+  networkpolicie:
     short: np
-  nodes:
+  node:
     short: n
   persistentvolume:
     short: pv
-  persistentvolumeclaims:
+  persistentvolumeclaim:
     short: pvc
-  poddisruptionbudgets:
+  poddisruptionbudget:
     short: pdb
   podpreset:
     short: pp
-  pods:
+  pod:
     short: p
-  podsecuritypolicies:
+  podsecuritypolicy:
     short: psp
-  podtemplates:
+  podtemplate:
     short: pt
-  replicasets:
+  replicaset:
     short: rs
-  replicationcontrollers:
+  replicationcontroller:
     short: krc
-  resourcequotas:
+  resourcequota:
     short: rq
-  rolebindings:
+  rolebinding:
     short: rb
-  roles:
+  role:
     short: r
-  secrets:
+  secret:
     short: sc
-  serviceaccounts:
+  serviceaccount:
     short: sa
-  services:
+  service:
     short: s
-  statefulsets:
+  statefulset:
     short: ss
+  storageclass:
+    short: scls
 
 cmds:
   - short: c
@@ -114,6 +116,15 @@ additional:
   - short: k
     cmd: "kubectl"
     comment: "CLI aliases."
+  - short: kg
+    cmd: "kubectl get"
+    comment: "CLI aliases."
+  - short: ke
+    cmd: "kubectl edit"
+    comment: "CLI aliases."
+  - short: kd
+    cmd: "kubectl describe"
+    comment: "CLI aliases."
   - short: kctx
     cmd: "kubectx"
     comment: "CLI aliases."
@@ -125,6 +136,9 @@ additional:
     comment: "Pushing/modifying configs."
   - short: kaf
     cmd: "kubectl apply -f"
+    comment: "Pushing/modifying configs."
+  - short: kdf
+    cmd: "kubectl describe -f"
     comment: "Pushing/modifying configs."
   - short: kgf
     cmd: "kubectl get -f"
