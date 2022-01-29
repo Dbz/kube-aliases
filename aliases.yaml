@@ -164,4 +164,13 @@ additional:
   - short: keit
     cmd: "kubectl exec -it"
     comment: "Exec alias."
+  - short: kk
+    cmd: "kubectl config"
+    comment: "Modify kubeconfig files."
+  - short: kkc
+    cmd: "kubectl config get-contexts"
+    comment: "Describe one or many contexts."
+  - short: kku
+    cmd: "kubectl config use-context"
+    comment: "Set the current-context in a kubeconfig file."
 

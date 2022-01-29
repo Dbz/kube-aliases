@@ -518,3 +518,12 @@ alias klf="kubectl logs -f"
 
 # Exec alias.
 alias keit="kubectl exec -it"
+
+# Modify kubeconfig files.
+alias kk="kubectl config"
+
+# Describe one or many contexts.
+alias kkc="kubectl config get-contexts"
+
+# Set the current-context in a kubeconfig file.
+alias kku="kubectl config use-context"

@@ -955,3 +955,15 @@ New-Alias -Name klf -Value ps1_klf
 # Exec alias.
 function ps1_keit {kubectl exec -it}
 New-Alias -Name keit -Value ps1_keit
+
+# Modify kubeconfig files.
+function ps1_kk {kubectl config}
+New-Alias -Name kk -Value ps1_kk
+
+# Describe one or many contexts.
+function ps1_kkc {kubectl config get-contexts}
+New-Alias -Name kkc -Value ps1_kkc
+
+# Set the current-context in a kubeconfig file.
+function ps1_kku {kubectl config use-context}
+New-Alias -Name kku -Value ps1_kku
