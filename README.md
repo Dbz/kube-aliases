@@ -65,7 +65,7 @@ git clone https://github.com/Dbz/kube-aliases.git ~/.oh-my-zsh/custom/plugins/ku
 echo "plugins+=(kube-aliases)" >> ~/.zshrc
 ```
 
-You can also manually place `zsh-kuberenetes` inside of `plugins=(...)`
+You can also manually place `kube-aliases` inside of `plugins=(...)`
 
 If you have set the `ZSH_CUSTOM` environment variable in your zshrc, then you should modify the git clone directory to be `$ZSH_CUSTOM/plugins/kube-aliases`.
 
