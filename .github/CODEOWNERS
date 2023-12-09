@@ -1,12 +1,2 @@
-/production-*.mistk8s.pvt/ @samblake30
-/aws-production-*.eks/ @samblake30
-/eu-*.mistk8s.pvt/ @samblake30
-/eu-*.eks/ @samblake30
-/use1prod2-*.mistk8s.pvt/  @samblake30
-/use1prod2-*.eks/ @samblake30
-/apse2prod5-*.eks/    @samblake30
-/use2canary99-*.eks/ @samblake30
-/gcp-production.mist.pvt/ @samblake30
-/gcp-production-*.mist.pvt/ @samblake30
-/gcp-nane1prod1-*.mist.pvt/ @samblake30
-/euwe1prod3-*.mist.pvt/ @samblake30
+/docs/ @samblake30
+
